@@ -1,0 +1,1786 @@
+[[include :scp-jp:credit:start |mode=no-rate]]
+**タイトル:** SCP-4000-JPコンテスト
+**著者:** SCP財団
+**作成年:** 2025
+[[include :scp-jp:credit:end]]
+
+-----
+
+[[=]]
+++* 多くの災いは自ら招くものである。
+[[>]]
+――ジャン・ジャック・ルソー『人間不平等起源論』
+[[/>]]
+[[/=]]
+
+-----
+
+[[toc]]
+
+-----
+
+[[=]]
++ 投稿作品
+
++++++* ランダムな一作:
+[[module ListPages category="_default" limit="1" order="random" separate="no" tags="+4000jp -コンテスト +jp"]]
++++* **%%title_linked%%**
+[[/module]]
+[[/=]]
+
+[[tabview]]
+[[tab 最小化]]
+[[/tab]]
+
+[[tab 投稿順]]
+[[module ListPages category="_default" order="created_at" separate="no" tags="+4000jp +scp +jp"  perPage="250"]]
+# [[size 110%]]**%%title_linked%%**[[/size]] //by// **@@%%created_by%%@@** (%%created_at|%Y/%m/%d %H:%M%%)
+[[/module]]
+[[/tab]]
+
+[[tab 評価順]]
+[[module ListPages category="_default" order="rating desc" separate="no" tags="+4000jp +scp +jp"  perPage="250"]]
+# [[size 110%]]**%%title_linked%%**[[/size]] //by// **@@%%created_by%%@@**
+[[/module]]
+[[/tab]]
+[[/tabview]]
+
+-----
+
+[[=]]
++ イベント日程
+
+|| 推敲期間 || 2025/10/13 (月) ～ 12/28 (日) 23:59 (77日間) || エントリー予定の下書きの批評をサンドボックスで受けることができる期間です。 ||
+|| 投稿(エントリー)期間 || 12/13 (土) 0:00 ～ 12/28 (日) 23:59 (16日間) || 記事をエントリーさせることができる期間です。**__期間が従来に比べて短い__**ためご注意ください。 ||
+|| 本戦投票期間 || 12/13 (土) 0:00 ～ 1/17 (土) 23:59 (36日間) || 評価を競う期間です。延長戦に突入しなかった場合、期間終了時点で決着となります。 ||
+|| 延長戦投票期間 || 1/18 (日) 0:00 ～ 1/24 (土) 23:59 (7日間) || 本戦終了時に暫定1位と2位の間が僅差の場合は延長戦に突入します([#entyosen 詳細後述])。期間終了時点で最高評価の記事がSCP-4000-JPとなります。 ||
+[[/=]]
+
+決着後、1日～3日ほどかけて表彰の処理を行い、1週間以内にシリーズJP-Vが解禁されます。
+
+-----
+
+[[=]]
++ はじめに
+[[/=]]
+
+[*/scp3000jp-contest-hub SCP-3000-JPコンテスト]から3年、とうとうSCP-4000-JPを決める時期がやってまいりました。いわゆる「キリ番コンテスト」もなんと4回目となります。
+
+4と言う数字は日本では古来から不吉な数字として知られています。これにちなんで不吉をもたらす「わざわい」を本コンテストのテーマとして選出いたしました。
+
+超常の存在を扱う創作であるSCP財団において「わざわい」というものはあまねく存在していることでしょう。果たしてどのような「わざわい」なのか？何に対する「わざわい」なのか？このような感情表現をするのは適切ではないかもしれませんが、沢山の「わざわい」がもたらされることを楽しみにしております。
+
+[[=]]
+++ テーマ: 「わざわい」
+[[/=]]
+
+参加者は「**わざわい**」をテーマにした"SCP-4000-JP"の執筆を行ってください。"テーマにする"とは「**わざわい**」が作品の主幹となっている必要があり、例えば作品内にその単語がちらっと登場するだけなどは認められません。「**わざわい**」という単語をどのように解釈するかは著者の裁量に委ねられますが、説明を求められた際にどのような解釈を行い作品に盛り込んだかを説明できる必要があります。
+
+優勝作品のみが真の"SCP-4000-JP"として認められ、優勝できなかった作品は別のナンバースロットに移動します。
+
+[[=]]
++ エントリー
+[[/=]]
+
+++ エントリー条件&方法
+本コンテストへのエントリーには以下の条件を満たす必要があり、以下が適切に行われている場合エントリーしたものと見做します。
+
+* 少なくとも本コンテストの全日程終了までSCP-JPのサイトメンバーであること
+* 「永久欠格」([#eikyu-kekkaku 後述])に該当していないこと
+* 共著で参加する場合、共著者すべてが上述の条件を満たしており、かつSCP-4000-JPコンテストへの参加について合意していること
+* //jp//かつ//scp//にあてはまるテーマに沿った作品を執筆し、投稿期間中に投稿すること
+
+* ページタイトルを「SCP-4000-JP - **メタタイトル**」という形式にすること
+* ページネーム (URL) を「@@http://scp-jp.wikidot.com/scp-4000-jp-@@**アカウント名**」という形式で投稿すること
+ * シリーズページから[アクセス拒否]となっている番号に投稿するのではなく、ブラウザのアドレスバーに直接URLを書き込んでページを作成して下さい
+ * 例えば、[[*user Jiraku_Mogana]]というアカウントの場合は「@@http://scp-jp.wikidot.com/scp-4000-jp-jiraku-mogana@@」という形式になります
+ * 共著記事の場合、投稿を担当したメンバーのみの名前をページネームに用い、ディスカッションで後述のエントリー表明の際に誰が参加した共著作品なのかを明示してください
+* 「**//4000jp//**」タグを付与すること
+* 以上を踏まえた上で通常の投稿規則を遵守すること
+ * ただし「SCP一覧の「[アクセス拒否]」から記事のメタタイトルに書き換え」という工程は不要です
+* エントリー記事の「ページごとのディスカッション」において以下のテンプレートを用いて本コンテストへの参加表明 (必須) と希望ナンバースロット (任意、[#sankasho 後述]) の提出を行うこと
+
+[[div class="blockquote"]]
+SCP-4000-JPコンテストに参加します。
+著者は@@[[*user @@**アカウント名**@@]]@@です。
+
+以下は希望するナンバースロットです。
+@@> 第0希望: SCP-4000-JP@@
+@@> 第1希望: SCP-4@@**XXX**@@-JP@@
+@@> 第2希望: SCP-4@@**XXX**@@-JP@@
+@@> 第3希望: SCP-4@@**XXX**@@-JP@@
+@@> 第4希望: SCP-4@@**XXX**@@-JP@@
+@@> 第5希望: SCP-4@@**XXX**@@-JP@@
+[[/div]]
+
+++ エントリー取り下げと再エントリー
+* 著者1人につき1作までしか同時にエントリーさせることができません。
+ * 共著作品をエントリーさせる場合、共著者すべてがエントリー権を消費しているものと見做します。
+* 参加記事がテーマに沿っていないとイベント委員会が判断したものはエントリーを取り消す可能性があります。
+* エントリー条件を満たしていないことが後から発覚した場合、イベント委員会がエントリーを取り消す可能性があります。
+ * 取り消しの前に警告が行われ、指定された期日以内での改善が見られない場合に実行されます。
+* イベント委員会によるエントリー取り消しは、厳正な調査の下その必要性が認められる場合に実行されます。
+* エントリー記事は通常通り低評価削除の対象となります。低評価削除された記事はエントリーを自動で取り下げられます。
+* 投稿期間中、著者は自分の意思でエントリーの取り下げをすることができます。記事の自主削除もしくは3999-JP以下のナンバースロットへのリネームでエントリーは取り下げられます。投稿期間終了後、著者の意思によるエントリーの取り下げはできません。
+ * 共著記事の場合、取り下げには共著者すべての同意が必要です。
+* エントリーが取り消され/取り下げられた作品は、条件を満たし直した場合、再度のエントリーが可能です。
+* エントリーの取り下げをした場合、別の記事をエントリーさせることは可能です。ただし取り下げとエントリーを過度に繰り返す行為や未エントリーの複数の記事を投稿しておき最も評価が伸びた記事のみをエントリーする行為などは「著者1人につき1作」という原則を損なう行為であり、「失格」処分が下される場合があります。
+
+++ 免責事項
+エントリーの際は以下に同意したものと見做します。
+
+* 本ハブの内容及びコンテストのレギュレーションは予告なしに変更される可能性があります。
+* 通常通りサンドボックスⅢが利用できます。
+ * 下書き批評を募る際は、推敲期間中ならページコンソールからジャンル「イベント」を含んだ選択をしてください。
+ * また、下書きのタイトルに「4000-JPコン」など本コンテストの名称を追加してください。
+* DiscordのSCP-JPサーバーも開放されており、そちらで批評を募ることも可能です。利用ルールはサイトの[[[discord-guideline|ディスコードに関するルールとポリシー]]]に準じます。Discord自体の利用方法は各自で調べてください。
+* エントリー作品のタイトルが長大であったり構文で装飾を施されている場合、表彰等での掲載においてタイトルを正しく表記できない可能性があります。
+* 投稿期間終了からコンテスト終了までの間、エントリー作品は大規模改稿ができません。誤字・脱字・衍字や構文、タグのミスの修正のみ認められます。
+* コンテスト終了後のエントリーの取り消しはできません。
+* コンテスト終了後、参加作をシリーズJP-V (4000-JP～4999-JP) 以外のシリーズに属するナンバーにリネームすることは認められません。
+* 期間中複数回のコンテストルール違反が確認された場合、イベント委員会による議論のうえ、「失格」とすることがあります。失格となった場合、本コンテストへの参加資格を消失します。下に示す「永久欠格」には該当しないため、以降のコンテスト参加には影響しません
+* 表彰対象となった作品は、表彰の辞退ができません。辞退を行ったり、コンテスト終了後に記事の削除もしくは非常に大規模な改稿を行った場合、「永久欠格」と見做し、SCP-JPのイベントへの参加権限を凍結します。詳細は以下の折り畳みを確認してください。
+
+[[# eikyu-kekkaku]]
+
+[[collapsible show="▶ 「永久欠格」の詳細" hide="▼ 「永久欠格」の詳細"]]
+* 当コンテストでの受賞を辞退した場合は永久欠格となり、コンテスト参加の資格を将来にわたって喪失する。これは辞退した時点で取り消しが出来ないものとする。
+
+* 当コンテストの表彰作品が辞退等で空位となった場合、次点作品が繰り上げで受賞する。繰り上げ受賞を辞退した場合、同様にコンテスト参加の永久欠格とする。
+
+* コンテスト表彰作品の以下のような改稿は、イベント委員会による議論のうえ、コンテスト参加の永久欠格となる場合がある。
+ # 白紙化等の即時削除になるような改稿、または低評価削除を誘導するような内容への改稿。
+ # コンテストの趣旨を支える部分を削除することを含む、元々の記事のコンセプトからの逸脱が著しい改稿。
+
+* 上記1,2がイベント委員会による議論の結果コンテスト参加の永久欠格の対象になった場合、イベント委員会は永久欠格処分を行う前に、対象者へ「永久欠格とする理由の説明」及び「改稿差し戻しの推奨」を行わなければならない。2週間の間に改稿の差し戻しが行われなかった場合、永久欠格の処分を行う。
+[[/collapsible]]
+
+-----
+
+[[=]]
++ 部門と表彰
+[[/=]]
+
+本コンテストでは部門は設けられず、上位3作のみが本コンテストでは表彰されます。
+
+++ 本戦と延長戦[[# entyosen]]
+
+本コンテストでは、従来の予選投票期間/決選投票期間という形式ではなく、本戦投票期間/延長戦投票期間という形式を採ります。決選投票用のポイントは用意されず、通常の評価 (Rate) ポイントのみで順位を競う点に注意してください。
+
+本戦投票期間終了時、以下の条件を満たすエントリー記事が存在するかのチェックが行われます。存在しない場合、その時点で順位が確定し、コンテスト終了の処理を行います。
+* 暫定1位と評価 (Rate) ポイントの差が**10**以下
+
+存在する場合、コンテストは延長戦投票期間に突入します。延長戦投票期間は、投票期間が1週間延長されることとほぼ変わりません。ただし、暫定1位と条件を満たしている記事は、エントリー記事一覧の上部に大きく掲載されます。延長戦投票期間終了時、すべてのエントリー記事は順位が確定されます。
+
+++ 評価基準
+記事の評価 (Rate) の高さを参照し順位は判断されます。
+
+同票が発生した場合、Voteのうちポジティブ評価の数が多いものを上位と見做します。それも同等であった場合、投稿日が**早い**記事を上位と見做します。それでも判断できない場合、SCP-4000-JPコンテスト専任委員内で投票を行い順位を決定します。投票対象の記事の著者が専任委員であった場合、投票への参加権は与えられません。
+
+++ 賞典
+
+本コンテストでは以下の3つの賞を設けます。
+
+# **金賞** _
+1位の記事が対象となります。[[[SCP-4000-JP]]]のナンバースロットと、特別な金のトロフィーモジュールが授与されます。また、コンテスト終了後に本ページの上部で表彰され、[[[event-archive-jp|]]]及び[[[12thanivpages|]]]にも記録されます。また、コンテスト終了後1ヶ月間[[[main|サイトトップページ]]]で紹介されます。   _
+@@ @@
+# **銀賞** _
+2位の記事が対象となります。特別な銀のトロフィーモジュールが授与されます。また、コンテスト終了後に本ページの上部で表彰され、[[[12thanivpages|]]]にも記録されます。   _
+@@ @@
+# **銅賞** _
+3位の記事が対象となります。特別な銅のトロフィーモジュールが授与されます。また、コンテスト終了後に本ページの上部で表彰され、[[[12thanivpages|]]]にも記録されます。
+
+++ 参加賞[[# sankasho]]
+金賞の対象となる記事以外のすべてのエントリー記事が対象となります。受賞の辞退はできませんが、他の賞の表彰対象となっていない限りコンテスト終了後に改稿を行っても「[#eikyu-kekkaku 永久欠格]」の対象とはなりません。
+
+金賞でない記事は4000-JP以外のナンバースロットに移動する必要がありますが、その移動先を選択することができます。すべてのエントリー記事はエントリー時に希望ナンバースロットを第5希望まで宣言することができ、上位記事から順番にそれが優先されます。この移動の処理はコンテスト終了後にイベント委員会により行われます。
+
+-----
+
+[[=]]
++ 読者の方へ
+[[/=]]
+
+* 記事へのVoteは[[[vote-policy|]]]に従い、通常の記事の評価と同じ基準で行ってください。テーマへの合致度は評価基準に含まれません。
+* 投票終了が近くなってきたからといって、優勝者を操作するためにVoteをコロコロ変えるのは認められません。やめてください。
+* ルールを満たしていないと思われる作品を見つけた場合、早めに__運営まで__ご一報ください。
+
+-----
+
+[[=]]
++ Q & A[[# faq]]
+[[/=]]
+
++++ エントリー条件についての質問
+
+[[div class="blockquote"]]
+**Q:** 複数の作品をエントリーできますか?
+
+**A:** できません。これは最高のSCP-4000-JPを選出するためのコンテストです。あなたの全力が注ぎ込まれた一作のみをエントリーさせてください。
+[[/div]]
+
+[[div class="blockquote"]]
+**Q:** //共著//でのエントリーはできますか?
+
+**A:** 可能です。ただし、共著参加者は他の記事で参加することができなくなる点に留意してください。
+[[/div]]
+
+[[div class="blockquote"]]
+**Q:** //合作//でのエントリーはできますか?
+
+**A:** できません。
+[[/div]]
+
+[[div class="blockquote"]]
+**Q:** //J//や//EX//でのエントリーはできますか?
+
+**A:** 投稿時、すべてのエントリー記事はSCP-4000-JPとして扱われます。なので、SCP-4000-JP-JやSCP-4000-JP-EXは対象外ということになります。SCP-JP-JやSCP-JP-EXリストに属する記事は投稿できません。ただし、例えば演出としてオブジェクトクラスがExplainedだったりする分には構いません。
+[[/div]]
+
+[[div class="blockquote"]]
+**Q:** //D//でのエントリーはできますか?
+
+**A:** Decommissionedクラスの記事は通常のシリーズに格納されており、現状の運用ではSCP-XXXX-JP-D = SCP-XXXX-JPとみなされています。そのためSCP-4000-JP-Dとしてのエントリーは可能です。ページタイトルを「SCP-4000-JP-D - メタタイトル」、ページネーム (URL) を「@@http://scp-jp.wikidot.com/scp-4000-jp@@-アカウント名」として下さい。
+[[/div]]
+
+[[div class="blockquote"]]
+**Q:** //アダルト//でのエントリーはできますか?
+
+**A:** 不可能ではありません。ただし、ちゃんと"SCP-4000-JP"を書いてくださいね。
+[[/div]]
+
+[[div class="blockquote"]]
+**Q:** //001提言//でのエントリーはできますか?
+
+**A:** //001提言//ってSCP-001-JPですよね。これはSCP-4000-JPコンテストなので、言うまでもなくできません。
+[[/div]]
+
+[[div class="blockquote"]]
+**Q:**  投稿してから数日経った作品をエントリーさせることはできますか?
+
+**A:** 可能です。ただし、記事の投稿が投稿期間中であるなどエントリー条件をすべて満たしている必要があります。
+[[/div]]
+
+[[div class="blockquote"]]
+**Q:**  締め切りギリギリに投稿したのでエントリー宣言やタグ付けなどのエントリー作業が投稿期間外になってしまいました。これはエントリーできますか？
+
+**A:** 投稿期間中に記事の投稿が出来ていれば問題ありません。ただしなるべく速やかに作業を終えることをお願いいたします。
+[[/div]]
+
+[[div class="blockquote"]]
+**Q:** 締め切りギリギリに投稿したらタイムスタンプが0:00:01になって投稿期間を少し過ぎてしまいました。これはエントリーできますか？
+
+**A:** サイトの稼働状況により意図せずタイムスタンプが締め切りをまたぐことはあり得ます。そのため、イベント委員による投稿期間終了宣言を締め切りの目安とします。ただし基本的には23:59:59が〆切です。wikidotが不安定になる可能性や過去トラブルが多発していることを鑑みて、締め切り直前ではなく**余裕を持った投稿を非常に強く推奨します**。
+[[/div]]
+
++++ コンテストや投稿記事の形式についての質問
+
+[[div class="blockquote"]]
+**Q:** 投稿時のナンバーは何を入れればいいですか？コンテスト終了後にナンバーが決まるんですよね？
+
+**A:** SCP-4000-JPを使用してください。コンテスト期間中全ての作品は暫定的にSCP-4000-JPとみなされ、終了後金賞受賞作を除いてリナンバーが行われると考えて下さい。
+[[/div]]
+
+[[div class="blockquote"]]
+**Q:** ページタイトルにメタタイトルをつけるのは必須ですか？[*http://scp-jp.wikidot.com/occon25 オブジェクトクラス最強決定戦]や[*http://scp-jp.wikidot.com/tokicontest2025-hub 時のコンテスト]では任意だったと思いますが。
+
+**A:** 今回は他参加作品との区別をつける必要があるため必須になります。
+[[/div]]
+
+[[div class="blockquote"]]
+**Q:** メタタイトルに構文を使用しているため、ページタイトルに併記できません。
+
+**A:** 基本的にメタタイトルとページタイトルに併記するメタタイトルは一致していることが望ましいですが、同義の表現に代替しても問題ありません。
+[[/div]]
+
+[[div class="blockquote"]]
+**Q:** [*http://scp-jp.wikidot.com/scp-2147-jp 未解明アーティファクト2147号-JP] - ドリームホテル のようにページタイトルを「SCP-4000-JP」ではない表記にしたいと考えています。
+
+**A:** 上記のような例外的な記述に関して、その記事がSCP-4000-JPコンテストにエントリーしていることが自明であるなら許容されます。「**ページタイトル** - **メタタイトル**」という形式は遵守してください。一方、[*http://scp-jp.wikidot.com/scp-2101-jp --01.--]や[*http://scp-jp.wikidot.com/scp-1018-jp 認識災害系オブジェクトの報告書記述例]などといった形式の場合はタイトル中に4000という文字列が無くSCP-4000-JPコンテストエントリー作であることがわからないため許容されません。この場合エントリー時には「SCP-4000-JP - **ページタイトル**」などとし、コンテスト終了ナンバー確定後に変更してください。また、ディスカッションで実際はどのようなページタイトルとするのかを宣言しておくといいでしょう。
+[[/div]]
+
+[[div class="blockquote"]]
+**Q:** 投稿した後に書き直したくなりました。改稿していいですか?
+
+**A:** 投稿期間中ならばOKです。投稿期間終了後かつコンテスト期間内は、軽微なミスの修正だけが認められています。もしあなたのエントリー作品が受賞したら、大規模な改稿はできません。詳しくは「免責事項」の項目をご確認ください。
+[[/div]]
+
+[[div class="blockquote"]]
+**Q:** コンテスト終了後ならば大規模改稿して問題ないということですね？受賞はしていないものとします。
+
+**A:** その通りです。ただしコンテスト終了直後はイベント委員会によるナンバー置換やリネーム作業が実施されており競合する可能性があるため、改稿はその終了を待っていただいた方が好ましいでしょう。
+[[/div]]
+
+[[div class="blockquote"]]
+**Q:** 同票だった場合に行われる専任委員内での投票とはどのようなものですか?
+
+**A:** イベント常任委員とSCP-4000-JPコンテスト専任委員が1票を持ちます。サイトスタッフは兼任者でない限り投票権を持たず、また、対象記事の著者は投票に参加できません。
+[[/div]]
+
+[[div class="blockquote"]]
+**Q:** なんで投稿期間がいつものコンテストより短いのですか?
+
+**A:** 投稿期間よりも投票期間を長く設定するためです。その分、[http://scp-jp.wikidot.com/forum/t-17167788/scp-4000-jp 数か月前にテーマの告知]を行っているため十分な執筆期間は提供しているものと考えています。
+[[/div]]
+
+[[div class="blockquote"]]
+**Q:** 延長戦って決選投票と何が違うんですか?
+
+**A:** 決選投票の場合、進出した記事しか表彰の可能性がありません。延長戦は投票期間の延長という側面が強く、決選投票とは別物です。
+[[/div]]
+
+[[div class="blockquote"]]
+**Q:** 期間中にWikidotがサーバー落ちした場合の対応はありますか？
+
+**A:** 投稿期間中の長期サーバーダウンや各期間終了付近でWikidotが不安定になった場合、期間が延長される可能性があります。ですがそのような「わざわい」が起こらないことを祈ってください。
+[[/div]]
+
++++ 参加賞やナンバースロット決定についての質問
+
+[[div class="blockquote"]]
+**Q:** SCP-4000-JP以外のナンバーが本命なんだけど。
+
+**A:** このコンテストはSCP-4000-JPを決める戦いであり、4000番台のナンバーの獲得はあくまでオマケの参加賞です。そのためコンテスト目的に合致していないとして参加の対象外となります。(たとえ建前であっても) SCP-4000-JPを目指すという意思を持って参加していただきたく存じます。
+[[/div]]
+
+[[div class="blockquote"]]
+**Q:** 希望ナンバースロットの変更はできますか?
+
+**A:** 「ページごとのディスカッション」での希望表明ポストを編集することで可能です。ただし、コンテスト終了(投票期間終了)後の変更は認められず、終了時点でのポストの記載を元にナンバースロットが決定されます。
+[[/div]]
+
+[[div class="blockquote"]]
+**Q:** 希望したナンバースロットが上位記事にすべて取られてしまった場合どうなりますか?
+
+**A:** その時点での4千番台の空きスロットの中で最も小さい番号が割り当てられます。ただし、それを回避するために、コンテスト終了までは希望の変更が認められています。投票期間最終日付近になったら上位記事の希望ナンバーをうかがっておいてもいいかもしれませんね。
+[[/div]]
+
+[[div class="blockquote"]]
+**Q:** 第0希望にSCP-4000-JPを入れるのは義務ですか?
+
+**A:** 義務ではありませんが、あなたがSCP-4000-JPのスロットを切望していることを表明していただきたいです。
+[[/div]]
+
+[[div class="blockquote"]]
+**Q:** ナンバースロットを希望しない場合どうなりますか?
+
+**A:** その時点での4千番台の空きスロットの中で最も小さい番号が割り当てられます。
+[[/div]]
+
+[[div class="blockquote"]]
+**Q:** 6個以上のナンバースロットを希望してもいいですか?
+
+**A:** ダメ。もししていたらすべての希望を無効とし、希望なしと同等の扱いとします。逆に希望を5個未満とすることは問題ありません。
+[[/div]]
+
+[[div class="blockquote"]]
+**Q:** ナンバースロットを具体的な数字以外で希望することはできますか?
+
+**A:** 「空きナンバーの中で最大/最小」くらいなら大丈夫ですが、私たちに余計な算数や数学をさせるようなものは無視します。その辺は常識的にお願いいたします。できれば指定いただいた方が処理が楽なのでご協力お願いします。
+[[/div]]
+
+[[div class="blockquote"]]
+**Q:** 希望ナンバースロットで4000未満が禁止されているのは何故ですか?
+
+**A:** SCP-4000-JPを決める戦いに参加した記事は、新たなSCP-JPの歴史を切り開こうとした同士であるとして4000-JPと同じSCPシリーズに並ぶべきだと考えているためです。
+[[/div]]
+
++++ その他の質問
+[[div class="blockquote"]]
+**Q:** とっても面白い記事があったんですが、何が「わざわい」かわかりません。どうすれば良いですか?
+
+**A:** その場合は記事に[[span class="ruby"]]UV[[span class="rt"]]アップボート[[/span]][[/span]]してください。その上で、コンテスト運営委員までご連絡ください。委員がエントリー条件を満たしているかを判断します。
+[[/div]]
+
+[[div class="blockquote"]]
+**Q:** 面白いとは思うんですが、SCP-4000-JPになってほしくない記事があります。どうすればいいですか？
+
+**A:** その記事があなたのSCPの評価の基準で面白ければUVしてください。コンテストの勝者の操作を意図したVoteは許されておらず、本コンテストの勝者は評価の高さによって決定されます。
+[[/div]]
+
+[[div class="blockquote"]]
+**Q:** テーマの「わざわい」は漢字が指定されていませんよね。じゃあ「技Y」とか「技は良い」とかをテーマにしてもいいですよね？
+
+**A:** そんなトンチキなテーマに合致できるならどうにか普通の「わざわい」にこじつけることができるのではないですか？明確に禁止とはいたしませんが、「SCP-4000-JPコンテスト」という大舞台でそんな子供のダジャレみたいな滑ってることを言いだす無粋な人はいないですよね……？
+[[/div]]
+
+[[div class="blockquote"]]
+**Q:** 私はまだ初心者なので4000-JPを決めるコンテストに出るなんて烏滸がましいですよね？
+
+**A:** そんなことはありません。SCP-4000-JPにチャレンジする機会は新人ベテラン問わず平等に与えられています。もし結果が振るわなかったとしても記事が残れば参加賞は貰えますし、きっとあなたにとって良い経験になることでしょう。
+[[/div]]
+
+[[div class="blockquote"]]
+**Q:** コンテストにはいつも出ているのでだいたいの流れは把握しています。本コンテストの他と違う点をまとめてくれませんか？
+
+**A:** わかりました。以下がクイックガイドになります！
+* 参加可能なのは「わざわい」をテーマとして執筆された「SCP-4000-JP」として投稿可能なSCP記事のみ
+* 投稿時、ページタイトルを「SCP-4000-JP - **メタタイトル**」、ページネーム (URL) を「@@http://scp-jp.wikidot.com/scp-4000-jp-@@**アカウント名**」とし、「//4000jp//」タグを付与する
+* ディスカッションで希望ナンバースロットを第0希望 (SCP-4000-JP) から第5希望まで提出する
+* エントリー可能な記事は1作のみ
+* エントリーの取り下げおよび再エントリーは可能だが節度のある範囲で
+* 本選投票期間終了後1位との差が10以内の記事がある場合、投票期間が延長される
+* 投稿開始は土曜0時 (金曜24時) 、投稿終了は日曜23:59で、従来の日曜始まり土曜〆ではないので注意！投票期間終了は従来通り土曜〆
+[[/div]]
+
+-----
+
+[[=]]
++ 併設キャンペーン
+[[/=]]
+
+併設キャンペーンとして、本コンテスト参加作とのクロスリンク作品を投稿する[[[saikatenpuku-campaign-hub|災禍転福キャンペーン]]]を開催します。SCP-4000-JPを巡る戦いへの別の関わり方を提案いたします。
+
+-----
+
+[[=]]
++ 運営&連絡先
+[[/=]]
+
+本コンテストはイベント委員会が主催しており、イベント常任委員を代表して[[*user Jiraku_Mogana]]が担当しています。本コンテストに関して何かご質問・ご連絡等がある場合、本ページのディスカッションか[[[discord-guideline|Discordのイベント委員会サーバー]]]までお願いいたします。
+
+++++* イベント常任委員
+[[include :05command-ja:staff-list:event-standing-organizer-2025]]
+
+++++* イベント専任委員
+* [[*user wavekey]]
+* [[*user atApostle]]
+
+-----
+
+[[=]]
++ イメージイラスト
+[[/=]]
+
+[[collapsible show="▶ ご提供いただいたイメージイラスト" hide="▼ 閉じる"]]
+本コンテストページのイメージイラストは[[*user atApostle]]氏にご提供いただきました。秀麗なイラストレーションのご提供およびハブ作成ご協力に御礼申し上げます。ありがとうございました。以下に応募いただいたイラストを掲載いたします。
+
+[[=image http://scp-jp-storage.wikidot.com/local--files/file:8993642-1-gfj3/moji_16_9_1.gif width="100%"]]
+[[=image http://scp-jp-storage.wikidot.com/local--files/file:8993642-1-5l8q/moji_4_1_1.gif width="100%"]]
+----
+
+また、惜しくも採用には至らなかったものの、ご応募いただいたイメージイラストを掲載いたします。
+
+[[=image http://scp-jp-storage.wikidot.com/local--files/file:9140075-1-qzb5/4000-JP_Pandora_16_9.png width="100%"]]
+[[=image http://scp-jp-storage.wikidot.com/local--files/file:9140075-2-0xie/4000-JP_Pandora_4_1.png width="100%"]]
+[[*user udonsoba]]氏にご提供いただきました。
+----
+[[=image http://scp-jp-storage.wikidot.com/local--files/file:9140075-3-6y38/4000-JP_mouth_16_9.png width="100%"]]
+[[=image http://scp-jp-storage.wikidot.com/local--files/file:9140075-4-b741/4000-JP_mouth_4_1.png width="100%"]]
+[[*user udonsoba]]氏にご提供いただきました。
+----
+[[=image http://scp-jp-storage.wikidot.com/local--files/file:2428007-183-9zf0/scp-jp-2025-4000-illust-16-9.png width="100%"]]
+[[=image http://scp-jp-storage.wikidot.com/local--files/file:2428007-184-h8vq/scp-jp-2025-4000-illust-4-1.png width="100%"]]
+[[*user Ryu JP]]氏にご提供いただきました。
+
+[[/collapsible]]
+
+----
+
+[[footnoteblock]]
+
+[[iftags]]
+[[code type="CSS"]]
+/*
+    Disaster Theme
+    [2025 Wikidot Theme]
+    Created by MikuKaneko
+    Based on Transcend Time Theme by MikuKaneko, Ryu JP
+    Licensed under the CC-BY SA 3.0
+*/
+
+/* Font Import */
+@import url("https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap");
+
+:root {
+    /* Header Config */
+    --logo-image: url("https://scp-jp-storage.wdfiles.com/local--files/file%3A3438721-224-z17t/scpjp_logo_white.svg");
+
+    /* Size Config */
+    --navigation-length: calc(var(--navigation-font-size) * 1.5);
+    --sidebar-width: calc(var(--base-font-size) * 15);
+    --vh-gap: max(calc(var(--base-font-size) * 2), calc(100lvh - 100lvh));
+
+    /* Font Config */
+    --navigation-font-size: var(--title-font-size);
+    --body-font: "Noto Serif JP", serif;
+    --title-font: var(--body-font);
+    --mono-font: "Roboto Mono", monospace;
+    --base-font-size: .9375rem;
+    --title-font-size: calc(var(--base-font-size) * 1.75);
+    --label-font-size: calc(var(--base-font-size) * .9);
+
+    /* Color Config*/
+    --hue: 0deg;
+    --background-color: var(--hue), 30%, 9%;
+    --on-background-color: var(--hue), 20%, 95%;
+    --primary-color: var(--hue), 70%, 70%;
+    --on-primary-color: var(--hue), 50%, 5%;
+    --secondary-color: var(--hue), 40%, 70%;
+    --on-secondary-color: var(--hue), 80%, 5%;
+    --accent-color: calc(var(--hue) + 110deg), 50%, 75%;
+    --on-accent-color: calc(var(--hue) + 110deg), 20%, 10%;
+    --subtle-color: var(--hue), 20%, 20%;
+    --on-subtle-color: var(--hue), 10%, 95%;
+
+    /* Other Config */
+    --background-alpha: .3;
+    --blur: 6px;
+    --transition-duration: .25s;
+}
+
+/* Hide Element */
+#header h1 a span, #header h2, #search-top-box, #top-bar, #login-status :is(#my-account, a[href="https://www.wikidot.com/account/messages"] > strong), #side-bar, #page-title, #avatar-hover-container, .odialog-shader-iframe, .odialog-shader {
+    display: none !important;
+}
+
+/* General Element */
+html {
+    scroll-behavior: smooth;
+}
+body {
+    background-color: hsl(var(--background-color));
+    color: hsl(var(--on-background-color));
+    color-scheme: dark;
+    font-family: inherit;
+    font-size: var(--base-font-size);
+    line-height: 1.5;
+    overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
+}
+html, body, blockquote, li, ol, p, ul, table, tbody, tfoot, button, input, label {
+    font-family: var(--body-font);
+}
+pre, code, tt, textarea, .page-source {
+    font-family: var(--mono-font);
+}
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--title-font);
+    margin: 0;
+    text-wrap: balance;
+}
+h1 {
+    color: hsl(var(--primary-color));
+    font-size: var(--title-font-size);
+    font-weight: 700;
+    margin: .25em 0;
+}
+h2 {
+    font-size: var(--title-font-size);
+    font-weight: 600;
+    margin: .25em 0;
+}
+h3 {
+    font-size: max(calc(var(--title-font-size) * .8), var(--base-font-size));
+    font-weight: 600;
+}
+h4 {
+    font-size: max(calc(var(--title-font-size) * .7), var(--base-font-size));
+    font-weight: 500;
+}
+h5 {
+    font-size: max(calc(var(--title-font-size) * .6), var(--base-font-size));
+    font-weight: 500;
+}
+h6 {
+    font-size: max(calc(var(--title-font-size) * .6), var(--base-font-size));
+}
+li, p {
+    line-height: 1.5;
+}
+a {
+    color: hsl(var(--primary-color));
+    font-weight: 500;
+}
+a.newpage {
+    color: hsl(var(--accent-color));
+}
+hr {
+    background-color: transparent;
+    background-image: linear-gradient(to right, transparent 0%, hsl(var(--primary-color)) 50%, transparent 100%);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: calc(100% - 2em);
+    margin: 1em 2em;
+}
+blockquote, div.blockquote, code, .code, #toc, .page-source {
+    background: hsla(var(--subtle-color), var(--background-alpha));
+    border-block: solid 1px hsl(var(--primary-color));
+    border-inline: none;
+    color: hsl(var(--on-subtle-color));
+}
+.ruby, ruby {
+    align-items: center;
+    display: inline-flex;
+    flex-direction: column-reverse;
+    height: 1em;
+    line-height: inherit;
+    text-align: justify;
+    vertical-align: bottom;
+}
+.rt, rt {
+    display: inline-block;
+    font-size: .5em;
+    height: 2em;
+    line-height: inherit;
+    text-align: justify;
+    width: 100%;
+}
+
+/* Input */
+#main-content .btn, table.page-history td.optionstd a, a.action-area-close, div.buttons input, input.button, button, file, a.button, .owindow :is(.content div[style="margin-top: 10px"] a, .close, .button-bar a) {
+    background: none;
+    border: solid 1px hsl(var(--subtle-color));
+    border-bottom: solid 2px hsl(var(--primary-color));
+    color: hsl(var(--on-background-color));
+    font-size: var(--label-font-size);
+    padding: .2em .5em;
+    transition: background var(--transition-duration), color var(--transition-duration);
+    white-space: nowrap;
+}
+#main-content .btn:hover, table.page-history td.optionstd a:hover, .action-area-close:hover, div.buttons input:hover, input.button:hover, button:hover, a.button:hover, .owindow :is(.content div[style="margin-top: 10px"] a, .close, .button-bar a):hover {
+    background: hsla(var(--subtle-color), var(--background-alpha));
+    color: hsl(var(--on-subtle-color));
+    text-decoration: none;
+}
+:is(input.button.disabled, div.buttons input.disabled), :is(input.button.disabled, div.buttons input.disabled):hover {
+    background: hsl(var(--subtle-color));
+    color: hsl(var(--on-subtle-color));
+}
+input.checkbox {
+    background: hsla(var(--subtle-color), var(--background-alpha));
+    color: hsl(var(--on-subtle-color));
+}
+input.text {
+    background: hsla(var(--subtle-color), var(--background-alpha));
+    border: 1px solid hsl(var(--subtle-color));
+    color: hsl(var(--on-subtle-color));
+}
+input.text.invalid {
+    background: hsl(var(--subtle-color));
+    border-color: hsl(var(--accent-color));
+}
+textarea {
+    background: hsla(var(--subtle-color), var(--background-alpha));
+    border: 1px solid hsl(var(--subtle-color));
+    color: hsl(var(--on-subtle-color));
+    padding: .25em;
+}
+
+/* Selection */
+::selection {
+    background: hsl(var(--primary-color));
+    color: hsl(var(--on-primary-color));
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    border: none;
+    height: calc(var(--base-font-size) * .5);
+    width: calc(var(--base-font-size) * .5);
+}
+::-webkit-scrollbar-thumb {
+    background: hsl(var(--secondary-color));
+    border-radius: var(--base-font-size);
+}
+::-webkit-scrollbar-track {
+    background: none;
+}
+body {
+    scrollbar-color: hsl(var(--secondary-color)) transparent;
+    scrollbar-width: calc(var(--base-font-size) * .5);
+}
+
+/* Wikidot & Custom Element */
+#breadcrumbs {
+    font-size: var(--label-font-size);
+    text-align: center;
+    margin: 0;
+    padding: 1em 0;
+}
+.wiki-content-table th {
+    background: hsl(var(--primary-color));
+    border: solid 1px hsl(var(--subtle-color));
+    color: hsl(var(--on-primary-color));
+}
+.wiki-content-table td {
+    border: solid 1px hsl(var(--subtle-color));
+}
+table[style="margin:0; padding:0"] {
+    margin: 0 auto !important;
+}
+#toc-list {
+    padding: 0 .5em;
+}
+.printuser a {
+    margin: 0;
+}
+.printuser img.small {
+    background-size: calc(var(--label-font-size) * 2) auto;
+    display: inline;
+    height: var(--label-font-size);
+    padding: 0 0 0 calc(var(--label-font-size) * .5);
+    vertical-align: unset;
+    width: var(--label-font-size);
+}
+.error-inline, .error-block, .warning-block {
+    border: solid 1px hsl(var(--accent-color));
+    color: hsl(var(--accent-color));
+}
+.help-block {
+    border: solid 1px hsl(var(--secondary-color));
+    color: hsl(var(--on-background-color));
+}
+
+/* Wrapper */
+div#container-wrap {
+    background: none;
+    margin: 100lvh 0 0;
+    padding: calc(var(--vh-gap) * 2) 0 0;
+}
+#content-wrap {
+    margin: 0;
+    max-width: unset;
+    min-height: unset;
+}
+#main-content {
+    margin: 0 auto;
+    max-width: calc(var(--base-font-size) * 60);
+    padding: 0 var(--base-font-size);
+    position: static;
+    transition: none;
+}
+#page-content {
+    font-size: inherit;
+    position: static;
+}
+
+/* Header Element */
+#header {
+    height: 0;
+    padding: 0;
+}
+#header h1 a {
+    background-image: var(--logo-image);
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    background-size: auto 90%;
+    height: var(--navigation-length);
+    left: 0;
+    max-height: unset;
+    padding: 0 calc(var(--base-font-size) * .5);
+    position: fixed;
+    top: 0;
+    transition: background-color var(--transition-duration);
+    width: var(--navigation-length);
+}
+#header h1 a:hover {
+    animation-play-state: paused;
+    background-color: hsla(var(--subtle-color), var(--background-alpha));
+}
+#login-status {
+    align-items: center;
+    display: flex;
+    font-size: 0;
+    height: var(--navigation-length);
+    padding: 0 calc(var(--base-font-size) * .5);
+    position: fixed;
+    right: 0;
+    top: 0;
+}
+#login-status::before {
+    content: "";
+    height: 100%;
+    left: 0;
+    position: absolute;
+    width: 100%;
+}
+#login-status:has(a:hover)::before {
+    animation-play-state: paused;
+}
+#login-status > :is(.printuser, a) {
+    z-index: 1;
+}
+#login-status > a {
+    transition: background var(--transition-duration);
+}
+#login-status > a:hover {
+    background: hsla(var(--subtle-color), var(--background-alpha));
+}
+#login-status > a::before {
+    display: inline-block;
+    font-family: "FontAwesome";
+    font-size: var(--title-font-size);
+    padding: 0 .2em;
+}
+#login-status .printuser img.small {
+    background: none !important;
+    display: block;
+    height: var(--title-font-size);
+    padding: 0;
+    width: var(--title-font-size);
+}
+#login-status .login-status-create-account::before {
+    content: "\f067";
+}
+#login-status .login-status-sign-in::before {
+    content: "\f090";
+}
+#login-status #account-topbutton {
+    border: none;
+    color: hsl(var(--on-background-color));
+    margin-left: 0;
+    padding: 0;
+}
+#login-status #account-topbutton::before {
+    content: "\f0d7";
+    font-size: var(--base-font-size);
+}
+#login-status a[href="https://www.wikidot.com/account/messages"] + #account-topbutton::before {
+    color: hsl(var(--accent-color));
+    content: "\f0f3";
+}
+#login-status #account-options {
+    background: hsla(var(--background-color), calc(var(--background-alpha) * 1.5));
+    border: solid 1px hsl(var(--subtle-color));
+    color: hsl(var(--on-background-color));
+    font-size: var(--label-font-size);
+    top: calc(var(--base-font-size) * 2);
+}
+#login-status ul a, #login-status ul a:hover {
+    background: none;
+    color: inherit;
+}
+/* Sidebar */
+.side-wrap {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.side-link {
+    bottom: 0;
+    box-sizing: border-box;
+    height: var(--navigation-length);
+    left: 0;
+    position: fixed;
+    width: var(--navigation-length);
+    z-index: 10;
+}
+li.unfolded .side-link {
+    height: 100%;
+    width: 100%;
+}
+.side-link a {
+    color: hsl(var(--on-background-color));
+    display: block;
+    font-family: "FontAwesome";
+    font-size: 0;
+    height: 100%;
+    line-height: 1.5;
+    text-align: center;
+    transition: background var(--transition-duration), color var(--transition-duration);
+    width: 100%;
+}
+.side-link a::before {
+    content: "\f0c9";
+    font-size: var(--navigation-font-size);
+}
+.side-link a:hover {
+    animation-play-state: paused;
+    background: hsla(var(--subtle-color), var(--background-alpha));
+    color: hsl(var(--on-subtle-color));
+    text-decoration: none;
+}
+li.unfolded .side-link :is(a, a:hover) {
+    animation-play-state: paused;
+    background: none;
+    border: none;
+    color: transparent;
+    transition: none;
+}
+li.unfolded .side-link a::before {
+    font-size: 0;
+}
+.side-bar {
+    background: hsla(var(--background-color), var(--background-alpha));
+    bottom: calc(var(--base-font-size) * 2.25 + 20px);
+    box-sizing: border-box;
+    height: 100%;
+    overflow-y: auto;
+    position: fixed;
+    top: 0;
+    transition: left var(--transition-duration);
+    width: var(--sidebar-width);
+    z-index: 11;
+}
+li.folded .side-bar {
+    left: calc(-1 * var(--sidebar-width));
+}
+li.unfolded .side-bar {
+    left: 0;
+}
+.side-block {
+    padding: .5em;
+}
+:is(.side-block, #interwiki) .heading {
+    border-bottom: solid 1px hsl(var(--primary-color));
+    font-size: var(--label-font-size);
+    margin: .5em 0 .25em;
+    padding: 0 0 0 .5em;
+}
+:is(.side-block, #interwiki) .menu-item {
+    margin: 0;
+    padding: .1em .5em;
+}
+.side-block a {
+    color: hsl(var(--on-background-color));
+}
+.side-block .twitter a::before {
+    content: "\f099";
+    font-family: "FontAwesome";
+}
+
+/* Interwiki */
+.interwiki p {
+    margin: 0;
+}
+#interwiki .side-block {
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    margin: 0;
+    padding: 0;
+}
+#interwiki .heading {
+    color: hsl(var(--on-background-color));
+    font-weight: normal;
+}
+#interwiki .menu-item img {
+    display: none;
+}
+#interwiki .menu-item a {
+    font-weight: normal;
+}
+
+/* Background */
+#extra-div-1 {
+    background-image: url("https://scp-jp-storage.wdfiles.com/local--files/file%3A8993642-2-f5gk/scp-4000-jp_contest_bg.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+    inset: 0;
+    opacity: calc(var(--background-alpha) * .75);
+    pointer-events: none;
+    position: fixed;
+    width: 100%;
+    z-index: -1;
+}
+
+/* Hero */
+#extra-div-2 {
+    align-items: flex-start;
+    background: hsl(var(--background-color));
+    box-shadow: 0 0 var(--vh-gap) var(--vh-gap) hsl(var(--background-color));
+    display: flex;
+    height: 100vh;
+    inset: 0;
+    justify-content: center;
+    max-width: unset !important;
+    position: absolute;
+    top: -100lvh;
+    width: 100vw;
+    z-index: -1;
+}
+#extra-div-2::before {
+    animation-duration: 1s;
+    animation-fill-mode: both;
+    animation-name: fadein-hero;
+    background-image: url("https://scp-jp-storage.wikidot.com/local--files/file%3A8993642-5-w98d/4000-JP_Hub_webp-38per.webp");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    content: "";
+    height: 100%;
+    inset: 0;
+    position: absolute;
+    width: 100%;
+}
+@keyframes fadein-hero {
+    from {
+        opacity: 0;
+        scale: 1.1;
+    }
+    to {
+        opacity: 1;
+        scale: 1;
+    }
+}
+#extra-div-2 span {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+}
+#extra-div-2 span::before, #extra-div-2 span::after {
+    animation-delay: .25s;
+    animation-duration: .75s;
+    animation-fill-mode: both;
+    animation-name: fadein-hero-logo;
+    background-position: bottom 25% center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    content: "";
+    display: block;
+    max-width: 100vw;
+}
+#extra-div-2 span::before {
+    aspect-ratio: 157 / 54;
+    background-image: url("https://scp-jp-storage.wdfiles.com/local--files/file%3A8993642-10-1cr1/SCP-4000-JP_shadow_251005.png");
+    margin-top: 2.5lvh;
+    width: calc(30lvh + 15vw);
+}
+#extra-div-2 span::after {
+    aspect-ratio: 128 / 29;
+    background-image: url("https://scp-jp-storage.wdfiles.com/local--files/file%3A8993642-11-8elq/wazawai_shadow_251005.png");
+    margin-bottom: calc(32.5lvh - 12vw);
+    width: 175lvh;
+}
+@keyframes fadein-hero-logo {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+@media (max-aspect-ratio: 1 / 1) {
+    #extra-div-2::before {
+        background-image: url("https://scp-jp-storage.wikidot.com/local--files/file%3A8993642-13-rpor/4000-JP_Hub_webp-9_16_25per.webp");
+    }
+    #extra-div-2 span::before {
+        margin-top: 14.5lvh;
+        width: 55vw;
+    }
+    #extra-div-2 span::after {
+        aspect-ratio: 512 / 145;
+        background-image: url("https://scp-jp-storage.wdfiles.com/local--files/file%3A8993642-14-4ggm/SCP-4000-JP_wazawai_shadow_2_251007.png");
+        margin-bottom: 16lvh;
+        width: 60lvh;
+    }
+}
+
+/* Bottom Link */
+.bottom-link {
+    bottom: 0;
+    color: hsl(var(--on-background-color));
+    display: block;
+    font-size: var(--navigation-font-size);
+    height: var(--navigation-length);
+    line-height: 1.5;
+    right: 0;
+    position: fixed;
+    text-align: center;
+    transition: background var(--transition-duration), color var(--transition-duration);
+    width: var(--navigation-length);
+    z-index: 1;
+}
+.bottom-link:hover {
+    animation-play-state: paused;
+    background: hsla(var(--subtle-color), var(--background-alpha));
+    color: hsl(var(--on-subtle-color));
+    text-decoration: none;
+}
+
+/* Navigation */
+:is(#header h1, .side-link) a, #login-status::before, .bottom-link {
+}
+
+/* Rate Module */
+#main-content .page-rate-widget-box {
+    border: solid 1px hsl(var(--subtle-color));
+    border-bottom: solid 2px hsl(var(--primary-color));
+    border-radius: 0;
+    box-shadow: none;
+    display: inline-block;
+    margin: 0 0 .5em;
+}
+#main-content .page-rate-widget-box * {
+    background: none;
+    border: none;
+    border-radius: 0;
+    box-sizing: unset;
+    color: hsl(var(--on-background-color));
+    display: inline-block;
+    font-family: inherit;
+    font-size: inherit;
+    height: unset;
+    margin: 0;
+    padding: 0;
+}
+#main-content :is(div.page-rate-widget-box .rate-points, .page-rate-widget-box a) {
+    padding: 0 .5em;
+    transition: background var(--transition-duration), color var(--transition-duration);
+}
+#main-content .page-rate-widget-box :is(a:hover, a:active) {
+    background: hsla(var(--subtle-color), var(--background-alpha));
+    color: hsl(var(--on-subtle-color));
+}
+
+/* Credit Module */
+#main-content .page-rate-widget-box a::before {
+    display: none;
+}
+#main-content .creditRate {
+    display: block;
+    float: none;
+    margin: 0 0 .5em;
+    text-align: center;
+}
+#main-content .creditRate .rateBox {
+    display: inline-block;
+}
+#main-content .rate-box-with-credit-button {
+    border-radius: 0;
+    display: inline-block;
+    height: unset;
+    min-width: unset;
+}
+#main-content .rate-box-with-credit-button .page-rate-widget-box {
+    margin: 0;
+}
+#main-content .rate-box-with-credit-button .creditButton {
+    background: none;
+    border: solid 1px hsl(var(--subtle-color));
+    border-bottom: solid 2px hsl(var(--primary-color));
+    border-radius: 0;
+    box-shadow: none;
+    display: inline-block;
+    font-size: inherit;
+    height: unset;
+    margin: 0 0 0 .2em;
+    width: unset;
+}
+#main-content .creditButton a {
+    color: hsl(var(--on-background-color));
+    display: inline-block;
+    font-size: inherit;
+    line-height: inherit;
+    padding: 0 .6em;
+    transition: background var(--transition-duration), color var(--transition-duration);
+    width: unset;
+}
+#main-content .creditButton :is(a:hover,  a:active) {
+    background: hsla(var(--subtle-color), var(--background-alpha));
+    color: hsl(var(--on-subtle-color));
+}
+#main-content :is(#u-credit-view,  #u-credit-otherwise) {
+    animation: none;
+    z-index: 11;
+}
+#main-content .fader {
+    background: none;
+}
+#main-content .fader iframe {
+    border: none;
+    opacity: 0;
+}
+#main-content .modalcontainer {
+    height: min-content;
+    max-width: 100vw;
+    min-width: unset;
+    width: calc(var(--base-font-size) * 40);
+}
+#main-content .modalbox {
+    background: hsla(var(--background-color), var(--background-alpha));
+    border: solid 1px hsl(var(--subtle-color));
+    border-radius: 0;
+    box-shadow: none;
+    height: unset;
+    min-height: unset;
+    min-width: unset;
+}
+#main-content .modalbox::after {
+    display: none;
+}
+#main-content .modalbox .modalbox-title {
+    background: hsla(var(--background-color), var(--background-alpha));
+    border-radius: 0;
+    margin-bottom: 0;
+    min-height: unset;
+}
+#main-content .modalbox .credit {
+    aspect-ratio: 8 / 3;
+    overflow: hidden auto;
+    margin: 0;
+    padding: 1em 2em;
+}
+#main-content .creditBottomRate {
+    position: unset;
+}
+#main-content .credit-license a.cc {
+    color: hsl(var(--on-background-color));
+}
+#main-content .creditRate.no-rate .page-rate-widget-box {
+    display: none;
+}
+
+/* Tab */
+:is(.yui-navset, .yui-navset .yui-navset-top, .yui-navset-bottom) .yui-nav {
+    border: none;
+    flex-flow: wrap;
+    display: flex;
+    margin: 0 1em .5em;
+    width: calc(100% - 2em);
+}
+:is(.yui-navset, .yui-navset .yui-navset-top, .yui-navset-bottom) .yui-nav li {
+    flex-grow: 1;
+    display: block;
+    margin: .2em .3em;
+    padding: 0;
+    text-align: center;
+    vertical-align: unset;
+}
+:is(.yui-navset, .yui-navset .yui-navset-top, .yui-navset-bottom) .yui-nav .selected {
+    margin: .2em .3em;
+}
+:is(.yui-navset, .yui-navset .yui-navset-top, .yui-navset-bottom) .yui-nav li a {
+    background: none;
+    border: solid 1px hsl(var(--subtle-color));
+    border-bottom: solid 2px hsl(var(--primary-color));
+    border-radius: 0;
+    color: hsl(var(--on-background-color));
+    display: block;
+    padding: .5em 1em;
+    transition: background var(--transition-duration), color var(--transition-duration);
+}
+.yui-navset .yui-nav li :is(a:focus, a:hover) {
+    background: hsla(var(--subtle-color), var(--background-alpha));
+    color: hsl(var(--on-subtle-color));
+}
+.yui-navset .yui-nav .selected :is(a, a:focus, a:hover) {
+    background: hsl(var(--primary-color));
+    color: hsl(var(--on-primary-color));
+}
+.yui-navset .yui-nav .selected a {
+    border: solid 1px hsl(var(--primary-color));
+    border-bottom-width: 2px;
+}
+:is(.yui-navset, .yui-navset .yui-navset-top, .yui-navset-bottom) .yui-nav li a em {
+    border: none;
+    padding: 0;
+    position: static;
+}
+.yui-navset .yui-nav .selected a em {
+    background: none;
+    padding: 0;
+}
+.yui-navset .yui-content {
+    background: transparent;
+    border: none;
+    border-top: solid 1px hsl(var(--subtle-color));
+    color: unset;
+    padding: 1em;
+}
+
+/* Pager */
+.pager a {
+    border: solid 1px hsl(var(--subtle-color));
+    color: hsl(var(--on-background-color));
+    font-size: var(--label-font-size);
+    padding: .2em .5em;
+    transition: background var(--transition-duration), color var(--transition-duration);
+    white-space: nowrap;
+}
+.pager a:hover {
+    background: hsla(var(--subtle-color), var(--background-alpha));
+    color: hsl(var(--on-subtle-color));
+}
+.pager .current {
+    background: hsl(var(--primary-color));
+    border: solid 1px hsl(var(--primary-color));
+    color: hsl(var(--on-primary-color));
+    font-size: var(--label-font-size);
+    padding: .2em .5em;
+}
+
+/* Page Tags */
+#main-content .page-tags {
+    margin: 1.5em 0 0;
+}
+.page-tags span {
+    border-top: solid 1px hsl(var(--subtle-color));
+    font-size: var(--label-font-size);
+}
+.page-tags a {
+    margin: 0 .25em;
+}
+.page-tags a::before {
+    content: "#";
+}
+
+/* Page Options */
+#page-info, .page-watch-options {
+    font-size: var(--label-font-size);
+}
+.page-options-bottom {
+    flex-flow: wrap;
+    display: flex;
+    height: unset;
+    line-height: 1.5;
+    margin: 0;
+    text-align: center;
+}
+.page-options-bottom a {
+    flex-grow: 1;
+    margin: 2px;
+}
+#revision-list :is(tr:first-child td, td:nth-child(2), td:nth-child(4)) {
+    white-space: nowrap;
+}
+table.page-compare :is(td, th) {
+    border: solid 1px hsl(var(--subtle-color));
+}
+
+/* Footer */
+#footer {
+    background: hsl(var(--secondary-color));
+    color: hsl(var(--on-secondary-color));
+    font-size: var(--label-font-size);
+    text-align: center;
+}
+#footer .options {
+    display: inline-block !important;
+    float: none;
+    width: unset;
+}
+#footer .options::after {
+    content: "|";
+}
+#footer a {
+    color: inherit;
+}
+#license-area {
+    color: hsl(var(--on-background-color));
+    font-size: var(--label-font-size);
+}
+
+/* Others */
+#action-area-top div, .alert, #lock-info {
+    background: hsl(var(--background-color));
+    border: solid 1px hsl(var(--subtle-color));
+    color: hsl(var(--on-background-color));
+    font-size: var(--label-font-size);
+}
+.owindow {
+    aspect-ratio: 16 / 9;
+    -webkit-backdrop-filter: blur(var(--blur));
+    backdrop-filter: blur(var(--blur));
+    background-color: hsla(var(--background-color), var(--background-alpha));
+    border: solid 1px hsl(var(--subtle-color));
+    height: min-content;
+    max-width: 100vw;
+    width: calc(var(--base-font-size) * 40) !important;
+}
+.owindow .title {
+    align-items: center;
+    background: hsla(var(--background-color), var(--background-alpha));
+    display: flex;
+    font-size: var(--title-font-size);
+    font-weight: 600;
+    height: unset;
+    justify-content: center;
+    padding: .25em 0;
+}
+.owindow .content {
+    aspect-ratio: 16 / 7;
+    overflow: hidden auto;
+    margin: 0;
+    padding: 1em 2em;
+}
+.owindow .content img {
+    background: none !important;
+}
+.owindow .content div[style="margin-top: 10px"] {
+    flex-flow: wrap;
+    display: flex;
+    text-align: center;
+}
+.owindow .content div[style="margin-top: 10px"] div[style="float:right"] {
+    text-align: right;
+    width: 100%;
+}
+.owindow .content div[style="margin-top: 10px"] a {
+    display: inline-block;
+    flex-grow: 1;
+    margin: 2px;
+}
+.hovertip {
+    background-color: hsla(var(--background-color), calc(var(--background-alpha) * 1.5)) !important;
+    border: solid 1px hsl(var(--subtle-color)) !important;
+    color: hsl(var(--on-background-color));
+    font-size: var(--label-font-size);
+}
+.hovertip .title {
+    background-color: hsla(var(--background-color), var(--background-alpha));
+    color: hsl(var(--on-background-color));
+}
+.flag-user-ok, .flag-user-abusive {
+    display: inline-block;
+}
+#extra-div-3, #extra-div-4 {
+    height: 100%;
+    inset: 0;
+    pointer-events: none;
+    position: fixed;
+    transition: backdrop-filter var(--transition-duration);
+    width: 100%;
+    z-index: 10;
+}
+body:is(:has(li.unfolded .side-link), :has(#u-credit-view:target), :has(.odialog-shader)) #extra-div-3 {
+    -webkit-backdrop-filter: saturate(.5);
+    backdrop-filter: saturate(.5);
+}
+body:is(:has(li.unfolded .side-link), :has(#u-credit-view:target), :has(.odialog-shader)) #extra-div-4 {
+    -webkit-backdrop-filter: blur(var(--blur));
+    backdrop-filter: blur(var(--blur));
+}
+
+/* Result */
+.result-content {
+    margin: 1em 0;
+}
+.result-content h2 {
+    margin: 0;
+}
+.result-wrap {
+    display: grid;
+    gap: 1em;
+    grid-template-areas:
+        "first first"
+        "second third";
+    grid-template-columns: 1fr 1fr;
+    margin: 0 0 3em;
+}
+.result-first {
+    grid-area: first;
+}
+.result-second {
+    grid-area: second;
+}
+.result-third {
+    grid-area: third;
+}
+.result-wrap :is(h2, h3) span {
+    font-weight: 400;
+}
+.result-wrap :is(h2, h3) span a {
+    font-weight: 700;
+}
+.result-wrap .printuser {
+    font-size: max(calc(var(--title-font-size) * .6), var(--base-font-size));
+}
+.result-first .printuser {
+    font-size: max(calc(var(--title-font-size) * .7), var(--base-font-size));
+}
+.finalvoting {
+    display: flex;
+    flex-flow: wrap;
+}
+.finalvoting div.blockquote {
+    flex-grow: 1;
+    margin: .75em;
+    min-width: 25em;
+    padding: .5em 1em;
+    text-align: start;
+}
+[[/code]]
+[[/iftags]]
+
+[[ul class="side-wrap scp-jp"]][[li class="folded"]]
+
+[[div_ class="foldable-list-container"]]
+[[span class="side-link"]][# ≡][[/span]]
+[[/div]]
+
+[[div_ class="side-bar"]]
+[[div_ class="side-block"]]
+[[div_ class="heading"]]
+初めての方へ
+[[/div]]
+
+[[div_ class="menu-item"]]
+[/site-rules サイトルール]
+[[/div]]
+
+[[div_ class="menu-item"]]
+[/licensing-guide ライセンスガイド]
+[[/div]]
+
+[[div_ class="menu-item"]]
+[/guide-for-newbies サイトへの参加]
+[[/div]]
+
+[[div_ class="menu-item"]]
+[/faq FAQ]
+[[/div]]
+
+[[div_ class="menu-item"]]
+[/contact-staff お問い合わせ]
+[[/div]]
+[[/div]]
+
+~~~~
+
+[[div_ class="side-block"]]
+[[div_ class="menu-item"]]
+[/ トップページ]
+[[/div]]
+
+[[div_ class="heading"]]
+SCPシリーズ
+[[/div]]
+
+[[div_ class="menu-item"]]
+[/scp-series I] | [/scp-series-2 II] | [/scp-series-3 III] | [/scp-series-4 IV] | [/scp-series-5 V]
+[[/div]]
+
+[[div_ class="menu-item"]]
+[/scp-series-6 VI] | [/scp-series-7 VII] | [/scp-series-8 VIII]
+[[/div]]
+
+[[div_ class="menu-item"]]
+[/scp-series-jp I-JP] | [/scp-series-jp-2 II-JP] | [/scp-series-jp-3 III-JP]
+[[/div]]
+
+[[div_ class="menu-item"]]
+[/scp-series-jp-4 IV-JP] | [/scp-series-jp-5 V-JP]
+[[/div]]
+
+[[div_ class="heading"]]
+その他のSCP
+[[/div]]
+
+[[div_ class="menu-item"]]
+[/scp-ex Explained] | [/joke-scps ジョーク]
+[[/div]]
+
+[[div_ class="menu-item"]]
+[/archived-scps アーカイブ]
+[[/div]]
+
+[[div_ class="menu-item"]]
+[/scp-jp-ex JP-EX] | [/joke-scps-jp JP-J] | [/archived-scps-jp JP-ARC]
+[[/div]]
+
+[[div_ class="menu-item"]]
+[/scp-international 国際版]
+[[/div]]
+
+[[div_ class="heading"]]
+サイト
+[[/div]]
+
+[[div_ class="menu-item"]]
+[/system:recent-changes 最近の更新]
+[[/div]]
+
+[[div_ class="menu-item"]]
+[/most-recently-created 最近の作成] | [/most-recently-edited 最近の編集]
+[[/div]]
+
+[[div_ class="menu-item"]]
+[/top-rated-pages 高評価] | [/lowest-rated-pages 低評価]
+[[/div]]
+
+[[div_ class="menu-item"]]
+[/top-rated-pages-en 高評価-EN]
+[[/div]]
+
+[[div_ class="menu-item"]]
+[/random:random-page ランダムページ]
+[[/div]]
+
+[[div_ class="heading"]]
+ストーリー
+[[/div]]
+
+[[div_ class="menu-item"]]
+[/goi-formats GoIF] | [/foundation-tales Tales]
+[[/div]]
+
+[[div_ class="menu-item"]]
+[/canon-hub カノン]
+[[/div]]
+
+[[div_ class="menu-item"]]
+[/log-of-anomalous-items AO] | [/log-of-extranormal-events EE] | [/log-of-unexplained-locations UE]
+[[/div]]
+
+[[div_ class="menu-item"]]
+[/creepy-pasta クリーピーパスタ]
+[[/div]]
+
+[[div_ class="menu-item"]]
+[/goi-formats-jp GoIF-JP] | [/foundation-tales-jp Tales-JP]
+[[/div]]
+
+[[div_ class="menu-item"]]
+[/canon-hub-jp カノン-JP] | [/series-hub-jp 連作-JP]
+[[/div]]
+
+[[div_ class="menu-item"]]
+[/log-of-anomalous-items-jp AO-JP] | [/log-of-extranormal-events-jp EE-JP] | [/log-of-unexplained-locations-jp UE-JP]
+[[/div]]
+
+[[div_ class="menu-item"]]
+[/collaboration-hub-jp 合作-JP]
+[[/div]]
+
+[[div_ class="menu-item"]]
+[/international-goi-formats GoIF国際版]
+[[/div]]
+
+[[div_ class="heading"]]
+コミュニティ
+[[/div]]
+
+[[div_ class="menu-item"]]
+[/guide-hub ガイド] | [/other-link-hub エッセイ]
+[[/div]]
+
+[[div_ class="menu-item"]]
+[/how-to-write:how-to-write 執筆ガイド] | [/deletions-guide 削除ガイド]
+[[/div]]
+
+[[div_ class="menu-item"]]
+[/meet-the-staff スタッフ]
+[[/div]]
+
+[[div_ class="menu-item"]]
+[/members-pages-jp 著者ページ-JP] | [/international-members-pages 国際版]
+[[/div]]
+
+[[div_ class="menu-item"]]
+[/forum:start フォーラム] | [/forum:recent-posts 最近の投稿]
+[[/div]]
+
+[[div_ class="menu-item discord"]]
+[/discord-guideline Discord]
+[[/div]]
+
+[[div_ class="heading"]]
+サイト
+[[/div]]
+
+[[div_ class="menu-item"]]
+[/artwork-jp アートワーク-JP] | [/international-artwork 国際版]
+[[/div]]
+
+[[div_ class="menu-item"]]
+[/contest-archive コンテストアーカイブ]
+[[/div]]
+
+[[div_ class="menu-item"]]
+[/event-archive-jp イベントアーカイブ-JP]
+[[/div]]
+
+[[div_ class="menu-item"]]
+[/credits クレジット]
+[[/div]]
+
+[[div_ class="heading"]]
+世界観
+[[/div]]
+
+[[div_ class="menu-item"]]
+[/about-the-scp-foundation 財団とは]
+[[/div]]
+
+[[div_ class="menu-item"]]
+[/object-classes オブジェクトクラス]
+[[/div]]
+
+[[div_ class="menu-item"]]
+[/security-clearance-levels クリアランスレベル]
+[[/div]]
+
+[[div_ class="menu-item"]]
+[/groups-of-interest GoI]
+[[/div]]
+
+[[div_ class="menu-item"]]
+[/personnel-and-character-dossier 職員・人事]
+[[/div]]
+
+[[div_ class="menu-item"]]
+[/task-forces 機動部隊] | [/secure-facilities-locations 施設]
+[[/div]]
+
+[[div_ class="menu-item"]]
+[/groups-of-interest-jp GoI-JP] | [/locations-of-interest-jp LoI-JP]
+[[/div]]
+
+[[div_ class="menu-item"]]
+[/personnel-and-character-dossier-jp 職員・人事-JP]
+[[/div]]
+
+[[div_ class="menu-item"]]
+[/task-forces-jp 機動部隊-JP] | [/secure-facilities-locations-jp 施設-JP]
+[[/div]]
+
+[[div_ class="heading"]]
+リンク
+[[/div]]
+
+[[div_ class="menu-item twitter"]]
+[*https://twitter.com/scpjp_announce Twitter]
+[[/div]]
+
+[[div_ class="menu-item"]]
+[/links 外部サイト集]
+[[/div]]
+
+[[div_ class="menu-item"]]
+[*https://scpwiki.com/ SCP-EN] | [*http://scp-int.wikidot.com/ SCP-INT]
+[[/div]]
+
+[[div_ class="menu-item"]]
+[*http://scp-jp-sandbox3.wikidot.com/ SB3] | [*https://scp-jp-sandbox2.wikidot.com/ SB2] | [*http://scpsandbox-jp.wikidot.com/ SB]
+[[/div]]
+
+[[div_ class="menu-item"]]
+[*http://scp-jp-storage.wikidot.com/ ファイルストレージ]
+[[/div]]
+
+[[div_ class="menu-item"]]
+[*http://05command-ja.wikidot.com/ 財団日本支部理事会]
+[[/div]]
+[[/div]]
+
+~~~~
+
+[[div_ class="side-block interwiki"]]
+[[include :scp-jp:nav:interwiki |lang=jp|community=scp]]
+[[/div]]
+[[/div]]
+
+[[/li]][[/ul]]
+
+[[a_ class="bottom-link fa fa-chevron-up" href="#"]][[/a]]
+
+[[module CSS]]
+@import url("https://scp-jp.wdfiles.com/local--code/scp4000jp-contest-hub/1");
+
+:is(.yui-navset, .yui-navset .yui-navset-top, .yui-navset-bottom) .yui-nav li:first-child.selected {
+    display: none;
+}
+[[/module]]
+
+[[include :scp-jp:component:interwiki-style
+|priority=1
+|theme=https://scp-jp.wdfiles.com/local--code/scp4000jp-contest-hub/1
+]]
