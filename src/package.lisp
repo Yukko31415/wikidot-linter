@@ -11,23 +11,39 @@
 
 
 (defpackage #:wikilinter-parser
-	    (:use #:cl))
+  (:use #:cl))
+
+(defpackage #:wikilinter-fifo-queue
+  (:use #:cl)
+  (:export #:make-fifo-queue-handler))
 
 
 (defpackage #:wikilinter-components
   (:use #:cl)
-  (:shadow #:if)
+  (:shadow #:if
+	   #:=
+	   #:>)
 
   (:export
    
+   #:*component-classes*
+
    #:component-name
    #:component-bracketcount
    #:component-classp
    #:component-params
    #:component-content
-   #:component-raw
+   #:component-end-name
 
+   #:single-bracket
+   #:double-bracket
+   #:triple-bracket
+   #:classified
+   #:unclassified
+   
    #:toplevel
+
+   #:tag->component
    
    #:gallery
    
@@ -46,6 +62,13 @@
    #:tabview
    #:tab
    #:bibliography
+   #:a_
+   #:=
+   #:>
+   #:ul
+   #:li
+
+
    
    #:toc
    #:f>toc
