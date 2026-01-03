@@ -9,10 +9,13 @@
   :author      "Your Name"
   :license     "MIT"
   :version     "0.1.0"
-  :depends-on  ("CL-PPCRE"
-		"serapeum")
+  :depends-on  ("cl-ppcre" "serapeum" "log4cl" "alexandria")
   :serial t
   :components ((:file "src/package")
 	       (:file "src/wikilinter-components")
+	       (:file "src/wikilinter-fifo-queue")
 	       (:file "src/wikilinter-parser")
                (:file "src/main")))
+
+
+

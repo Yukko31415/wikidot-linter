@@ -12,7 +12,10 @@
    (classp :reader component-classp)
    (params
     :initarg :params
-    :reader component-params)))
+    :reader component-params)
+   (location
+    :initarg :location
+    :reader component-location)))
 
 (defclass single-bracket (component)
   ((bracketcount :initform 1)))
@@ -26,9 +29,9 @@
 (defclass classified (component)
   ((classp :initform t)
    (end-name :reader component-end-name)
-   (content
+   (content-queue-handler
     :initform (wikilinter-fifo-queue:make-fifo-queue-handler)
-    :reader component-content)))
+    :reader component-content-queue-handler)))
 
 (defclass unclassified (component)
   ((classp :initform nil)))
@@ -68,7 +71,6 @@
 (defcomponent gallery (double-bracket) "gallery")
 
 
-
 (defcomponent size (double-bracket classified) "size")
 (defcomponent code (double-bracket classified) "code")
 (defcomponent collapsible (double-bracket classified) "collapsible")
@@ -84,11 +86,16 @@
 (defcomponent tabview (double-bracket classified) "tabview")
 (defcomponent tab (double-bracket classified) "tab")
 (defcomponent bibliography (double-bracket classified) "bibliography")
+(defcomponent a (double-bracket classified) "a")
 (defcomponent a_ (double-bracket classified) "a_" "/a")
 (defcomponent = (double-bracket classified) "=")
 (defcomponent > (double-bracket classified) ">")
+(defcomponent < (double-bracket classified) "<")
 (defcomponent ul (double-bracket classified) "ul")
 (defcomponent li (double-bracket classified) "li")
+(defcomponent table (double-bracket classified) "table")
+(defcomponent row (double-bracket classified) "row")
+(defcomponent cell (double-bracket classified) "cell")
 
 
 
