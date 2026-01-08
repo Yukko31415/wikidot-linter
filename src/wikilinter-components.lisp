@@ -38,7 +38,9 @@
 
 
 
-(defclass toplevel (classified) ())
+(defclass toplevel (classified)
+  ((name :initform nil)
+   (end-name :initform nil)))
 
 
 (defun tag->component (tagname)
@@ -65,6 +67,8 @@
     `(progn
        (defclass ,class-name ,direct-superclasses ,slots)
        (setf (gethash ,component-name *component-classes*) ',class-name))))
+
+
 
 
 (defmacro component-list (direct-superclasses list)
