@@ -10,6 +10,7 @@
 
 
 (defun %get-string-block-and-rest (text)
+  (declare (type simple-string text))
   (let ((scanner (load-time-value
 		  (ppcre:create-scanner
 		   "(?s)(?<!\\[)\\[\\[(?!\\[)(.*?)(?<!\\])\\]\\](?!\\])"))))
@@ -22,10 +23,10 @@
 
 
 (defun get-tag-and-params (text)
-  "テキストを受け取り、tagとparams、それ以外を返す。
+  "テキストを受け取り、tagとparams、それ以外を返す。nilが入力された場合はnilを返す。
 タグとパラメータの区切りとしてスペース、改行、タブを許容する。"
   (multiple-value-bind (content other)
-      (%get-string-block-and-rest text)
+      (if text (%get-string-block-and-rest text) (values nil nil))
     (if (null content)
 	(values nil nil other)		; contentがnilの場合
 	(let ((pos (position-if (lambda (c)
@@ -68,6 +69,52 @@
     (case key
       (:str (caar loc-data))
       (:pos (cdar loc-data)))))
+
+
+
+;; --------------------------------------------------
+;; %destruct-block-content
+;; --------------------------------------------------
+
+
+
+(define-condition component-not-found (error)
+  ((tag-name :initarg :tag-name :reader tag-name)
+   (location :initarg :location :reader location))
+  (:report (lambda (c s)
+	     (format s "ERROR: component-not-found
+~A行目: \"~a\"は辞書に存在しないタグです。"
+		     (location c)
+		     (tag-name c)))))
+
+
+(defmacro %push-content-to-queue (queue-handler values)
+  (alexandria:with-gensyms (component remainder)
+    `(multiple-value-bind (,component ,remainder) ,values
+       ;; コンポーネントが存在する場合にpush
+       (when component
+	 (funcall ,queue-handler :push ,component))
+       ;; remainderの長さが0あるいはnilでない場合にpush
+       (unless (or (zerop (length ,remainder)) (null ,remainder))
+	 (funcall ,queue-handler :push ,remainder)))))
+
+
+
+(defun %destruct-block-content (queue-handler loc-list-handler tag params remainder)
+  (multiple-value-bind (component-name)
+      (wikilinter-components:tag->component tag)
+    (unless component-name
+      (error 'component-not-found
+	     :tag-name tag
+	     :location (get-loc-data (funcall loc-list-handler :get)
+				     :pos)))
+    (let ((component
+	    (make-instance component-name
+			   :params params
+			   :location (funcall loc-list-handler :get))))
+      (%push-content-to-queue
+       queue-handler
+       (%destruct-ftml-block component loc-list-handler remainder)))))
 
 
 ;; --------------------------------------------------
@@ -118,64 +165,6 @@
 	       (t ,else))))))
 
 
-
-;; --------------------------------------------------
-;; destruct-block-content
-;; --------------------------------------------------
-
-
-
-(define-condition component-not-found (error)
-  ((tag-name :initarg :tag-name :reader tag-name)
-   (location :initarg :location :reader location))
-  (:report (lambda (c s)
-	     (format s "ERROR: component-not-found
-~A行目: \"~a\"は辞書に存在しないタグです。"
-		     (location c)
-		     (tag-name c)))))
-
-
-(defmacro %push-content-to-queue (queue-handler values)
-  (alexandria:with-gensyms (component remainder)
-    `(multiple-value-bind (,component ,remainder) ,values
-       ;; コンポーネントが存在する場合にpush
-       (when component
-	 (funcall ,queue-handler :push ,component))
-       ;; remainderの長さが0あるいはnilでない場合にpush
-       (unless (or (zerop (length ,remainder)) (null ,remainder))
-	 (funcall ,queue-handler :push ,remainder)))))
-
-
-
-(defun %destruct-block-content (queue-handler loc-list-handler
-			     tag params remainder)
-  (multiple-value-bind (component-name)
-      (wikilinter-components:tag->component tag)
-    (unless component-name
-      (error 'component-not-found
-	     :tag-name tag
-	     :location (get-loc-data (funcall loc-list-handler :get)
-				     :pos)))
-    (let ((component
-	    (make-instance component-name
-			   :params params
-			   :location (funcall loc-list-handler :get))))
-      (%push-content-to-queue queue-handler
-       (%destruct-ftml-block component
-			     loc-list-handler
-			     remainder)))))
-
-
-(defun destruct-block-content (component loc-list-handler tag params remainder)
-  (handler-bind
-      ((unmatch-tag-end-name
-	 #'(lambda (c) (handle-unmatch-tag-end-name component c))))
-
-    (let ((queue-handler (wikilinter-components:component-content-queue-handler component)))
-      (%destruct-block-content queue-handler loc-list-handler
-			       tag params remainder))))
-
-
 ;; --------------------------------------------------
 ;; handle-unmatch-tag-end-name
 ;; --------------------------------------------------
@@ -214,45 +203,40 @@
 ;; --------------------------------------------------
 
 
-(defgeneric %destruct-ftml-block (component loc-list-handler &optional remainder))
+(defgeneric %%destruct-ftml-block (component loc-list-handler &optional remainder))
 
 
 
 
-(defmethod %destruct-ftml-block ((component wikilinter-components:toplevel)
+(defmethod %%destruct-ftml-block ((component wikilinter-components:toplevel)
 				 loc-list-handler &optional remainder)
   (declare (ignorable remainder))
-  (handler-bind
-      ((unmatch-tag-end-name
-	 #'(lambda (c) (handle-unmatch-tag-end-name component c))))
-    (loop
-      :with queue-handler
-	:= (wikilinter-components:component-content-queue-handler component)
-      :and loc-data := (funcall loc-list-handler :get)
-      :with initial-string := (get-loc-data loc-data :str)
+  (loop
+    :with queue-handler
+      := (wikilinter-components:component-content-queue-handler component)
+    :and loc-data := (funcall loc-list-handler :get)
+    :with initial-string := (get-loc-data loc-data :str)
 
-      :initially (unless (starts-with-exactly-n-chars-p #\[ 2 initial-string)
-		   (funcall queue-handler :push initial-string)
-		   (funcall loc-list-handler :next))
+    :initially (unless (starts-with-exactly-n-chars-p #\[ 2 initial-string)
+		 (funcall queue-handler :push initial-string)
+		 (funcall loc-list-handler :next))
 
-      :for current-loc := (funcall loc-list-handler :get)
-      :for content := (get-loc-data current-loc :str)
-      :do (multiple-value-bind (tag params remainder) (get-tag-and-params content)
-	    (restart-case
-		(if-tag-end-name ((tag (get-loc-data current-loc :pos)) component)
-				 (return component)
-				 (destruct-block-content component loc-list-handler tag params remainder))
-	      (ignore-tag ()
-		:report "タグを無視して続行する"
-		(progn
-		  (funcall queue-handler :push remainder)
-		  (funcall loc-list-handler :next))))))))
+    :for current-loc := (funcall loc-list-handler :get)
+    :for content := (get-loc-data current-loc :str)
+    :do (multiple-value-bind (tag params remainder) (get-tag-and-params content)
+	  (restart-case
+	      (if-tag-end-name ((tag (get-loc-data current-loc :pos)) component)
+			       (return component)
+			       (%destruct-block-content queue-handler loc-list-handler tag params remainder))
+	    (ignore-tag ()
+	      :report "タグを無視して続行する"
+	      (progn
+		(funcall queue-handler :push content)
+		(funcall loc-list-handler :next)))))))
 
 
 
-
-
-(defmethod %destruct-ftml-block ((component wikilinter-components:classified)
+(defmethod %%destruct-ftml-block ((component wikilinter-components:classified)
 				 loc-list-handler &optional remainder)
   (loop
     :with queue-handler
@@ -265,32 +249,41 @@
 
     :for current-loc := (funcall loc-list-handler :get)
     :for content := (get-loc-data current-loc :str)
-    :while content
+    
     :do (multiple-value-bind (tag params outer) (get-tag-and-params content)
 	  (restart-case
 	      (if-tag-end-name ((tag (get-loc-data current-loc :pos)) component)
 			       (progn
 				 (funcall loc-list-handler :next)
 				 (return (values component outer)))
-			       (destruct-block-content
-				component loc-list-handler tag params outer))
+			       (%destruct-block-content queue-handler loc-list-handler tag params outer))
 	    (close-tag ()
 	      :report "タグを閉じて続行する"
 	      (return (values component "")))
 	    (ignore-tag ()
 	      :report "タグを無視して続行する"
 	      (progn
-		(funcall queue-handler :push outer)
+		(funcall queue-handler :push content)
 		(funcall loc-list-handler :next)))))))
 
 
-
-
-(defmethod %destruct-ftml-block ((component wikilinter-components:unclassified)
-				 loc-list-handler &optional remainder)
+(defmethod %%destruct-ftml-block ((component wikilinter-components:unclassified)
+				  loc-list-handler &optional remainder)
   (progn
     (funcall loc-list-handler :next)
     (values component remainder)))
+
+
+
+
+(defun %destruct-ftml-block (component loc-list-handler &optional remainder)
+  (handler-bind
+      ((unmatch-tag-end-name
+	 #'(lambda (c) (handle-unmatch-tag-end-name component c)))
+       (component-not-found
+	 #'(lambda (c) (format t "~A行目: \"~a\"は辞書に存在しないタグです。" (location c) (tag-name c))
+	     (invoke-restart 'ignore-tag))))
+    (%%destruct-ftml-block component loc-list-handler remainder)))
 
 
 
@@ -300,6 +293,7 @@
 
 
 (defun %count-lines (str)
+  (declare (type simple-string str))
   (if (equal str "")
       0
       (count #\Newline str)))
@@ -317,10 +311,14 @@
 ;; make-location-list-handler
 ;; --------------------------------------------------
 
-(defun %parse-ftml-text (n text)
+
+
+(defun %parse-ftml-text (text)
   "n重の角括弧の『開始位置』だけを見つけ、次の開始位置までを一つの塊として切り出す"
   (let* (;; 開始タグ [[ だけを探す
-	 (pattern (format nil "(?<!\\[)\\[{~D}(?!\\[)" n))
+	 (pattern (load-time-value
+		   (ppcre:create-scanner
+		    "(?<!\\[)\\[{2}(?!\\[)")))
 	 (offsets (ppcre:all-matches pattern text))
 	 (results nil))
     (if (null offsets)
@@ -342,7 +340,7 @@
 	  (nreverse results)))))
 
 (defun make-location-list-handler (string)
-  (let* ((loc-list (make-location-list (%parse-ftml-text 2 string)))
+  (let* ((loc-list (make-location-list (%parse-ftml-text string)))
 	 (pointer loc-list))
     (lambda (_) (case _
 	     (:next (pop pointer))
@@ -357,6 +355,7 @@
 
 
 (defun destruct-ftml-block (string)
+  (declare (type simple-string string))
   (let* ((loc-list-handler (make-location-list-handler string))
 	 (toplevel (make-instance 'wikilinter-components:toplevel
 				  :location (funcall loc-list-handler :get))))
@@ -372,16 +371,16 @@
 (defparameter *test-string*
   (uiop:read-file-string "~/common-lisp/wikidot-linter/data/test.txt"))
 
-(make-location-list (%parse-ftml-text 2 *test-string*))
-
-(time (destruct-ftml-block *test-string*))
-
-
 (defparameter *test-object*
   (make-instance 'wikilinter-components:toplevel
 		 :location (make-location-list
-			    (%parse-ftml-text 2 *test-string*))))
+			    (%parse-ftml-text *test-string*))))
 
+;; (make-location-list (%parse-ftml-text *test-string*))
+
+
+
+;; (time (destruct-ftml-block *test-string*))
 
 
 
