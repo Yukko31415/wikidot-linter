@@ -285,7 +285,7 @@
       ((unmatch-tag-end-name
 	 #'(lambda (c) (handle-unmatch-tag-end-name component c)))
        (component-not-found
-	 #'(lambda (c) (format t "~A行目: \"~a\"は辞書に存在しないタグです。" (location c) (tag-name c))
+	 #'(lambda (c) (format t "~A行目: \"~a\"は辞書に存在しないタグです。~%" (location c) (tag-name c))
 	     (invoke-restart 'ignore-tag))))
     (%%destruct-ftml-block component loc-list-handler remainder)))
 
