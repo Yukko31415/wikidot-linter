@@ -132,13 +132,13 @@
 ~a行目: \"~a\"は、
 ~a行目: \"~a\"の閉じタグではありません。
 ~a"
-			    (current-pos c)
-			    (tag-end-name c)
-			    (get-loc-data (component-location c)
-					  :pos)
-			    (component-name c)
-			    (get-loc-data (component-location c)
-					  :str)))))
+				 (current-pos c)
+				 (tag-end-name c)
+				 (get-loc-data (component-location c)
+					       :pos)
+				 (component-name c)
+				 (get-loc-data (component-location c)
+					       :str)))))
 
 
 (defun %tag-end-p (tag)
@@ -174,7 +174,8 @@
 
 
 (defmethod handle-unmatch-tag-end-name ((component wikilinter-components:toplevel) condition)
-  "unmatch-tag-end-nameがトップレベルまで解決されなかった場合、そのタグは無効な閉じタグとして処理されるべきである"
+  "unmatch-tag-end-nameがトップレベルまで解決されなかった場合、
+そのタグは無効な閉じタグとして処理されるべきである"
   (let ((current-pos (current-pos condition))
 	(tag-end-name (tag-end-name condition)))
     (progn
@@ -184,7 +185,8 @@
 
 
 (defmethod handle-unmatch-tag-end-name ((component wikilinter-components:classified) condition)
-  "classifiedコンポーネント内でunmatch-tag-end-nameが解決された場合、その子の閉じタグが存在しないと考えることができる"
+  "classifiedコンポーネント内でunmatch-tag-end-nameが解決された場合、
+エラー発生箇所の閉じタグは存在しないと考えることができる"
   (let ((component-end-name (wikilinter-components:component-end-name component))
 	(tag-end-name (tag-end-name condition))
 	(component-name (component-name condition))
@@ -227,7 +229,8 @@
 	  (restart-case
 	      (if-tag-end-name ((tag (get-loc-data current-loc :pos)) component)
 			       (return component)
-			       (%destruct-block-content queue-handler loc-list-handler tag params remainder))
+			       (%destruct-block-content queue-handler loc-list-handler
+							tag params remainder))
 	    (ignore-tag ()
 	      :report "タグを無視して続行する"
 	      (progn
@@ -256,7 +259,8 @@
 			       (progn
 				 (funcall loc-list-handler :next)
 				 (return (values component outer)))
-			       (%destruct-block-content queue-handler loc-list-handler tag params outer))
+			       (%destruct-block-content queue-handler loc-list-handler
+							tag params outer))
 	    (close-tag ()
 	      :report "タグを閉じて続行する"
 	      (return (values component "")))
@@ -339,6 +343,8 @@
 
 	  (nreverse results)))))
 
+
+
 (defun make-location-list-handler (string)
   (let* ((loc-list (make-location-list (%parse-ftml-text string)))
 	 (pointer loc-list))
@@ -368,13 +374,13 @@
 ;; temp-codes
 ;; ------------------------
 
-(defparameter *test-string*
-  (uiop:read-file-string "~/common-lisp/wikidot-linter/data/test.txt"))
+;; (defparameter *test-string*
+;;   (uiop:read-file-string "~/common-lisp/wikidot-linter/data/test.txt"))
 
-(defparameter *test-object*
-  (make-instance 'wikilinter-components:toplevel
-		 :location (make-location-list
-			    (%parse-ftml-text *test-string*))))
+;; (defparameter *test-object*
+;;   (make-instance 'wikilinter-components:toplevel
+;; 		 :location (make-location-list
+;; 			    (%parse-ftml-text *test-string*))))
 
 ;; (make-location-list (%parse-ftml-text *test-string*))
 

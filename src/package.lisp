@@ -13,7 +13,8 @@
 
 
 (defpackage #:wikilinter-parser
-  (:use #:cl))
+  (:use #:cl)
+  (:export #:destruct-ftml-block))
 
 
 (defpackage #:wikilinter-fifo-queue
