@@ -12,4 +12,10 @@
   (finish-output)
   (let ((textdata (uiop:read-file-string (uiop:parse-native-namestring (read-line)))))
     (terpri)
-    (wikilinter-parser:destruct-ftml-block textdata)))
+    (time (wikilinter-parser:destruct-ftml-block textdata)))
+  (loop
+    :initially (format t "qで終了~%")
+	       (finish-output)
+    :do (when (string= "q" (read-line))
+	  (loop-finish))
+    :finally (format t "終了します. . .")))
