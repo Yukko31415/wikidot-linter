@@ -12,12 +12,10 @@
   :depends-on  ("cl-ppcre" "serapeum" "log4cl" "alexandria")
   :serial t
   :components ((:file "src/package")
-	       (:file "src/wikilinter-components")
 	       (:file "src/wikilinter-fifo-queue")
+	       (:file "src/wikilinter-components")
 	       (:file "src/wikilinter-parser")
-               (:file "src/main")))
-
-
-
-
-
+               (:file "src/main"))
+  :build-operation "program-op"
+  :build-pathname "wikilinter"
+  :entry-point "wikidot-linter:main")
