@@ -7,6 +7,9 @@
 
 (in-package #:wikidot-linter)
 
+
+
+
 (defun get-string-from-file ()
   (format t "ファイルパスを入力: ")
   (finish-output)
@@ -17,14 +20,19 @@
       (finish-output)
       (get-string-from-file))))
 
+
+
 (defun main ()
   "Entry point for the application."
-  (let ((textdata (get-string-from-file)))
-    (terpri)
-    (time (wikilinter-parser:destruct-ftml-block textdata)))
   (loop
-    :initially (format t "qで終了~%")
-	       (finish-output)
-    :do (when (string= "q" (read-line))
-	  (loop-finish))
+    :for textdata := (get-string-from-file)
+
+    :do (terpri)
+	(time (wikilinter-parser:destruct-ftml-block textdata))
+	(format t "qで終了/nで次のファイル~%")
+	(finish-output)
+	(alexandria:switch ((read-line) :test #'string=)
+	  ("q" (loop-finish))
+	  ("n" nil))
     :finally (format t "終了します. . .")))
+
