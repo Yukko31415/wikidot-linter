@@ -45,8 +45,6 @@
 		      other))))))
 
 
-
-
 ;; --------------------------------------------------
 ;; utils
 ;; --------------------------------------------------
@@ -88,6 +86,7 @@
 		     (tag-name c)))))
 
 
+
 (defmacro %push-content-to-queue (queue-handler values)
   (alexandria:with-gensyms (component remainder)
     `(multiple-value-bind (,component ,remainder) ,values
@@ -100,7 +99,7 @@
 
 
 
-(defun %destruct-block-content (queue-handler loc-list-handler tag params remainder)
+(defun %destruct-block-content (queue-handler loc-list-handler tag params remainder debug-log)
   (multiple-value-bind (component-name)
       (wikilinter-components:tag->component tag)
     (unless component-name
@@ -114,7 +113,7 @@
 			   :location (funcall loc-list-handler :get))))
       (%push-content-to-queue
        queue-handler
-       (%destruct-ftml-block component loc-list-handler remainder)))))
+       (%destruct-ftml-block component loc-list-handler remainder debug-log)))))
 
 
 ;; --------------------------------------------------
@@ -142,8 +141,8 @@
 
 
 (defun %tag-end-p (tag)
-  "閉じタグかどうかを確認する"
-  (char= (char tag 0) #\/))
+  "nil、もしくは閉じタグかどうかを確認する"
+  (or (null tag) (char= (char tag 0) #\/)))
 
 
 (defmacro if-tag-end-name (((tag current-pos) component) then &optional else)
@@ -151,8 +150,7 @@
     (alexandria:once-only (tag component current-pos)
       `(let ((,end-name (wikilinter-components:component-end-name
 			 ,component)))
-	 (cond ((string= ,tag ,end-name)
-		,then)
+	 (cond ((string= ,tag ,end-name) ,then)
 	       ((%tag-end-p ,tag)
 		(error
 		 'unmatch-tag-end-name
@@ -170,21 +168,31 @@
 ;; --------------------------------------------------
 
 
-(defgeneric handle-unmatch-tag-end-name (component condition))
+(defgeneric handle-unmatch-tag-end-name (component debug-log condition))
 
 
-(defmethod handle-unmatch-tag-end-name ((component wikilinter-components:toplevel) condition)
+(defmethod handle-unmatch-tag-end-name ((component wikilinter-components:toplevel) debug-log condition)
   "unmatch-tag-end-nameがトップレベルまで解決されなかった場合、
 そのタグは無効な閉じタグとして処理されるべきである"
-  (let ((current-pos (current-pos condition))
-	(tag-end-name (tag-end-name condition)))
-    (progn
-      (format t "~A行目: \"~A\"は無効な閉じタグです~%~%"
-	      current-pos tag-end-name)
-      (invoke-restart 'ignore-tag))))
+  (let ((component-end-name (wikilinter-components:component-end-name component))
+	(current-pos (current-pos condition))
+	(tag-end-name (tag-end-name condition))
+	(component-name (component-name condition))
+	(loc (get-loc-data (component-location condition) :pos))
+	(str (get-loc-data (component-location condition) :str)))
+    (if (string= tag-end-name component-end-name)
+	(progn
+	  (push (cons loc (format nil "\"~A\"の閉じタグが見つかりません~%~A" component-name str))
+		(debug-log-list debug-log))
+	  (invoke-restart 'close-tag))
+	(progn
+	  (push (cons current-pos
+		      (format nil "\"~A\"は無効な閉じタグです" tag-end-name))
+		(debug-log-list debug-log))
+	  (invoke-restart 'ignore-tag)))))
 
 
-(defmethod handle-unmatch-tag-end-name ((component wikilinter-components:classified) condition)
+(defmethod handle-unmatch-tag-end-name ((component wikilinter-components:classified) debug-log condition)
   "classifiedコンポーネント内でunmatch-tag-end-nameが解決された場合、
 エラー発生箇所の閉じタグは存在しないと考えることができる"
   (let ((component-end-name (wikilinter-components:component-end-name component))
@@ -194,8 +202,8 @@
 	(str (get-loc-data (component-location condition) :str)))
     (when (string= tag-end-name component-end-name)
       (progn
-	(format t "~A行目: \"~A\"の閉じタグが見つかりません~%~A~%~%"
-		loc component-name str)
+	(push (cons loc (format nil "\"~A\"の閉じタグが見つかりません~%~A" component-name str))
+	      (debug-log-list debug-log))
 	(invoke-restart 'close-tag)))))
 
 
@@ -205,13 +213,16 @@
 ;; --------------------------------------------------
 
 
-(defgeneric %%destruct-ftml-block (component loc-list-handler &optional remainder))
 
+
+
+
+(defgeneric %%destruct-ftml-block (component loc-list-handler &optional remainder debug-log))
 
 
 
 (defmethod %%destruct-ftml-block ((component wikilinter-components:toplevel)
-				 loc-list-handler &optional remainder)
+				 loc-list-handler &optional remainder debug-log)
   (declare (ignorable remainder))
   (loop
     :with queue-handler
@@ -228,9 +239,10 @@
     :do (multiple-value-bind (tag params remainder) (get-tag-and-params content)
 	  (restart-case
 	      (if-tag-end-name ((tag (get-loc-data current-loc :pos)) component)
-			       (return component)
+			       (return (values component
+					       (debug-log-list debug-log)))
 			       (%destruct-block-content queue-handler loc-list-handler
-							tag params remainder))
+							tag params remainder debug-log))
 	    (ignore-tag ()
 	      :report "タグを無視して続行する"
 	      (progn
@@ -240,7 +252,7 @@
 
 
 (defmethod %%destruct-ftml-block ((component wikilinter-components:classified)
-				 loc-list-handler &optional remainder)
+				 loc-list-handler &optional remainder debug-log)
   (loop
     :with queue-handler
       := (wikilinter-components:component-content-queue-handler component)
@@ -260,7 +272,7 @@
 				 (funcall loc-list-handler :next)
 				 (return (values component outer)))
 			       (%destruct-block-content queue-handler loc-list-handler
-							tag params outer))
+							tag params outer debug-log))
 	    (close-tag ()
 	      :report "タグを閉じて続行する"
 	      (return (values component "")))
@@ -271,8 +283,10 @@
 		(funcall loc-list-handler :next)))))))
 
 
+
+
 (defmethod %%destruct-ftml-block ((component wikilinter-components:unclassified)
-				  loc-list-handler &optional remainder)
+				  loc-list-handler &optional remainder debug-log)
   (progn
     (funcall loc-list-handler :next)
     (values component remainder)))
@@ -280,14 +294,15 @@
 
 
 
-(defun %destruct-ftml-block (component loc-list-handler &optional remainder)
+(defun %destruct-ftml-block (component loc-list-handler &optional remainder debug-log)
   (handler-bind
       ((unmatch-tag-end-name
-	 #'(lambda (c) (handle-unmatch-tag-end-name component c)))
+	 #'(lambda (c) (handle-unmatch-tag-end-name component debug-log c)))
        (component-not-found
-	 #'(lambda (c) (format t "~A行目: \"~a\"は辞書に存在しないタグです。~%" (location c) (tag-name c))
+	 #'(lambda (c) (push (cons (location c) (format nil "\"~a\"は辞書に存在しないタグです。"  (tag-name c)))
+			(debug-log-list debug-log))
 	     (invoke-restart 'ignore-tag))))
-    (%%destruct-ftml-block component loc-list-handler remainder)))
+    (%%destruct-ftml-block component loc-list-handler remainder debug-log)))
 
 
 
@@ -296,11 +311,13 @@
 ;; --------------------------------------------------
 
 
+
 (defun %count-lines (str)
   (declare (type simple-string str))
   (if (equal str "")
       0
       (count #\Newline str)))
+
 
 
 (defun make-location-list (string-list)
@@ -359,40 +376,20 @@
 ;; destruct-ftml-block
 ;; --------------------------------------------------
 
+(defstruct debug-log
+  list)
 
 (defun destruct-ftml-block (string)
   (declare (type simple-string string))
-  (let* ((loc-list-handler (make-location-list-handler string))
+  (let* ((debug-log (make-debug-log))
+	 (loc-list-handler (make-location-list-handler string))
 	 (toplevel (make-instance 'wikilinter-components:toplevel
 				  :location (funcall loc-list-handler :get))))
-    (%destruct-ftml-block toplevel loc-list-handler)))
-
-
-
-
-;; ------------------------
-;; temp-codes
-;; ------------------------
-
-;; (defparameter *test-string*
-;;   (uiop:read-file-string "~/common-lisp/wikidot-linter/data/test.txt"))
-
-;; (defparameter *test-object*
-;;   (make-instance 'wikilinter-components:toplevel
-;; 		 :location (make-location-list
-;; 			    (%parse-ftml-text *test-string*))))
-
-;; (make-location-list (%parse-ftml-text *test-string*))
-
-
-
-;; (time (destruct-ftml-block *test-string*))
-
-
-
-
-
-
+    (multiple-value-bind (component debug-log)
+	(%destruct-ftml-block toplevel loc-list-handler "" debug-log)
+      (declare (ignorable component))
+      (loop :for (pos . message) :in (sort debug-log #'< :key #'car)
+	    :do (format t "~A行目: ~A~%~%" pos message)))))
 
 
 
