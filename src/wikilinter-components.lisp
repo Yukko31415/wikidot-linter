@@ -74,8 +74,9 @@
 (defmacro component-list (direct-superclasses list)
   "defcomponentに展開する"
   (let ((defcomponents
-	  (loop :for  (name component-name &optional (end-name nil end-name-p)) in list 
-		:collect (cl:if end-name-p
+	  (loop :for (name component-name end-name)
+		  :in list
+		:collect (cl:if end-name
 				`(defcomponent ,name ,direct-superclasses
 				     ,component-name ,end-name)
 				`(defcomponent ,name ,direct-superclasses
