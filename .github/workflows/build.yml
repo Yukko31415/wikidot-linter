@@ -30,6 +30,7 @@ jobs:
       - name: Install Lisp
         uses: 40ants/setup-lisp@v4
         with:
+	  implementation: sbcl
           asdf-system: wikidot-linter
 
       - name: Build Executable
