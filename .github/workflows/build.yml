@@ -26,7 +26,6 @@ jobs:
           asdf-system: wikidot-linter
 
       - name: Build Executable
-        shell: bash
         run: |
           ros -e '(asdf:make :wikidot-linter)'
 
@@ -35,5 +34,5 @@ jobs:
         with:
           name: wikidot-linter-${{ matrix.os }}
           path: |
-            wikidot-linter
-            wikidot-linter.exe
+            wikilinter
+            wikilinter.exe
