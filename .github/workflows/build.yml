@@ -27,7 +27,7 @@ jobs:
 
       - name: Build Executable
         run: |
-          ros -e '(asdf:make :wikidot-linter)'
+          ros -e '(asdf:make "wikidot-linter")'
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
