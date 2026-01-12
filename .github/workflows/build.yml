@@ -1,46 +1,39 @@
-
-
-name: Cross-Platform Build
+name: 'Build'
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ 'main', 'master' ]
+  pull_request:
 
 jobs:
   build:
     name: Build on ${{ matrix.os }}
-    # マトリックス設定で3つのOSを指定
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
-        include:
-          - os: ubuntu-latest
-            bin: wikilinter
-          - os: macos-latest
-            bin: wikilinter
-          - os: windows-latest
-            bin: wikilinter.exe
-
+    
     runs-on: ${{ matrix.os }}
+    
+    env:
+      LISP: sbcl-bin
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       - name: Install Lisp
         uses: 40ants/setup-lisp@v4
         with:
-          implementation: sbcl
           asdf-system: wikidot-linter
 
       - name: Build Executable
-        shell: bash  # Windowsでもbash構文を使えるように指定
+        shell: bash
         run: |
           ros -e '(asdf:make :wikidot-linter)'
-          
+
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          # OS名を含めた名前で保存
-          name: my-app-${{ matrix.os }}
-          path: ${{ matrix.bin }}
+          name: wikidot-linter-${{ matrix.os }}
+          path: |
+            wikidot-linter
+            wikidot-linter.exe
