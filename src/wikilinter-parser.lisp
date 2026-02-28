@@ -3,13 +3,14 @@
 
 
 
+
 ;; --------------------------------------------------
 ;; get-tag-and-params
 ;; --------------------------------------------------
 
 
-
 (defun %get-string-block-and-rest (text)
+  "コードブロックとそれ以外の文字列を分ける"
   (declare (type simple-string text))
   (let ((scanner (load-time-value
 		  (ppcre:create-scanner
@@ -24,25 +25,25 @@
 
 (defun get-tag-and-params (text)
   "テキストを受け取り、tagとparams、それ以外を返す。nilが入力された場合はnilを返す。
-タグとパラメータの区切りとしてスペース、改行、タブを許容する。"
+タグとパラメータの区切りとしてスペース、改行、タブを許容する"
   (multiple-value-bind (content other)
-      (if text (%get-string-block-and-rest text) (values nil nil))
-    (if (null content)
-	(values nil nil other)		; contentがnilの場合
-	(let ((pos (position-if (lambda (c)
-				  (member c '(#\Space #\Newline #\Tab #\Return)))
-				content)))
-	  (if pos
-	      ;; 区切り文字が見つかった場合
-	      (values (string-downcase (subseq content 0 pos))
-		      ;; paramsの先頭の空白もついでにトリム
-		      (string-left-trim '(#\Space #\Newline #\Tab #\Return)
-					(subseq content (1+ pos)))
-		      other)
-	      ;; 区切り文字がない場合
-	      (values (string-downcase content)
-		      ""
-		      other))))))
+		       (if text (%get-string-block-and-rest text) (values nil nil))
+		       (if (null content)
+			   (values nil nil other) ; contentがnilの場合
+			 (let ((pos (position-if (lambda (c)
+						   (member c '(#\S pace #\N ewline #\T ab #\R eturn)))
+						 content)))
+			   (if pos
+			       ;; 区切り文字が見つかった場合
+			       (values (string-downcase (subseq content 0 pos))
+				       ;; paramsの先頭の空白もついでにトリム
+				       (string-left-trim '(#\S pace #\N ewline #\T ab #\R eturn)
+							 (subseq content (1+ pos)))
+				       other)
+			     ;; 区切り文字がない場合
+			     (values (string-downcase content)
+				     ""
+				     other))))))
 
 
 ;; --------------------------------------------------
@@ -54,15 +55,16 @@
   "文字列 string の先頭が、ちょうど n 個の char で始まっているか判定する"
   (let ((len (length string)))
     (and (>= len n)		 ; まず長さが n 以上あるか
-       ;; 0からn番目までがすべて char か確認
-       (loop for i from 0 below n
-             always (char= (char string i) char))
-       ;; n番目の文字が char ではない（あるいは文字列がそこで終わっている）ことを確認
-       (or (= len n)
-	  (not (char= (char string n) char))))))
+	 ;; 0からn番目までがすべて char か確認
+	 (loop for i from 0 below n
+	       always (char= (char string i) char))
+	 ;; n番目の文字が char ではない（あるいは文字列がそこで終わっている）ことを確認
+	 (or (= len n)
+	     (not (char= (char string n) char))))))
 
 
-(defun get-loc-data  (loc-data key)
+(defun get-loc-data (loc-data key)
+  "locationデータからstr部分とpos部分を抽出する"
   (when loc-data
     (case key
       (:str (caar loc-data))
@@ -77,25 +79,25 @@
 
 
 (define-condition component-not-found (error)
-  ((tag-name :initarg :tag-name :reader tag-name)
-   (location :initarg :location :reader location))
-  (:report (lambda (c s)
-	     (format s "ERROR: component-not-found
+		  ((tag-name :initarg :tag-name :reader tag-name)
+		   (location :initarg :location :reader location))
+		  (:report (lambda (c s)
+			     (format s "ERROR: component-not-found
 ~A行目: \"~a\"は辞書に存在しないタグです。"
-		     (location c)
-		     (tag-name c)))))
+				     (location c)
+				     (tag-name c)))))
 
 
 
 (defmacro %push-content-to-queue (queue-handler values)
   (alexandria:with-gensyms (component remainder)
-    `(multiple-value-bind (,component ,remainder) ,values
-       ;; コンポーネントが存在する場合にpush
-       (when component
-	 (funcall ,queue-handler :push ,component))
-       ;; remainderの長さが0あるいはnilでない場合にpush
-       (unless (or (zerop (length ,remainder)) (null ,remainder))
-	 (funcall ,queue-handler :push ,remainder)))))
+			   `(multiple-value-bind (,component ,remainder) ,values
+						 ;; コンポーネントが存在する場合にpush
+						 (when component
+						   (funcall ,queue-handler :push ,component))
+						 ;; remainderの長さが0あるいはnilでない場合にpush
+						 (unless (or (zerop (length ,remainder)) (null ,remainder))
+						   (funcall ,queue-handler :push ,remainder)))))
 
 
 
@@ -145,6 +147,7 @@
   (or (null tag) (char= (char tag 0) #\/)))
 
 
+
 (defmacro if-tag-end-name (((tag current-pos) component) then &optional else)
   (alexandria:with-gensyms (end-name)
     (alexandria:once-only (tag component current-pos)
@@ -172,24 +175,24 @@
 
 
 (defmethod handle-unmatch-tag-end-name ((component wikilinter-components:toplevel) debug-log condition)
-  "unmatch-tag-end-nameがトップレベルまで解決されなかった場合、
+	   "unmatch-tag-end-nameがトップレベルまで解決されなかった場合、
 そのタグは無効な閉じタグとして処理されるべきである"
-  (let ((component-end-name (wikilinter-components:component-end-name component))
-	(current-pos (current-pos condition))
-	(tag-end-name (tag-end-name condition))
-	(component-name (component-name condition))
-	(loc (get-loc-data (component-location condition) :pos))
-	(str (get-loc-data (component-location condition) :str)))
-    (if (string= tag-end-name component-end-name)
-	(progn
-	  (push (cons loc (format nil "\"~A\"の閉じタグが見つかりません~%~A" component-name str))
-		(debug-log-list debug-log))
-	  (invoke-restart 'close-tag))
-	(progn
-	  (push (cons current-pos
-		      (format nil "\"~A\"は無効な閉じタグです" tag-end-name))
-		(debug-log-list debug-log))
-	  (invoke-restart 'ignore-tag)))))
+	   (let ((component-end-name (wikilinter-components:component-end-name component))
+		 (current-pos (current-pos condition))
+		 (tag-end-name (tag-end-name condition))
+		 (component-name (component-name condition))
+		 (loc (get-loc-data (component-location condition) :pos))
+		 (str (get-loc-data (component-location condition) :str)))
+	     (if (string= tag-end-name component-end-name)
+		 (progn
+		   (push (cons loc (format nil "\"~A\"の閉じタグが見つかりません~%~A" component-name str))
+			 (debug-log-list debug-log))
+		   (invoke-restart 'close-tag))
+	       (progn
+		 (push (cons current-pos
+			     (format nil "\"~A\"は無効な閉じタグです" tag-end-name))
+		       (debug-log-list debug-log))
+		 (invoke-restart 'ignore-tag)))))
 
 
 (defmethod handle-unmatch-tag-end-name ((component wikilinter-components:classified) debug-log condition)
@@ -239,8 +242,7 @@
     :do (multiple-value-bind (tag params remainder) (get-tag-and-params content)
 	  (restart-case
 	      (if-tag-end-name ((tag (get-loc-data current-loc :pos)) component)
-			       (return (values component
-					       (debug-log-list debug-log)))
+			       (return (values component (debug-log-list debug-log)))
 			       (%destruct-block-content queue-handler loc-list-handler
 							tag params remainder debug-log))
 	    (ignore-tag ()
@@ -287,9 +289,8 @@
 
 (defmethod %%destruct-ftml-block ((component wikilinter-components:unclassified)
 				  loc-list-handler &optional remainder debug-log)
-  (progn
-    (funcall loc-list-handler :next)
-    (values component remainder)))
+  (funcall loc-list-handler :next)
+  (values component remainder))
 
 
 
@@ -376,8 +377,7 @@
 ;; destruct-ftml-block
 ;; --------------------------------------------------
 
-(defstruct debug-log
-  list)
+(defstruct debug-log list)
 
 (defun destruct-ftml-block (string)
   (declare (type simple-string string))
@@ -390,9 +390,3 @@
       (declare (ignorable component))
       (loop :for (pos . message) :in (sort debug-log #'< :key #'car)
 	    :do (format t "~A行目: ~A~%~%" pos message)))))
-
-
-
-
-
-

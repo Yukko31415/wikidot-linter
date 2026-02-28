@@ -39,7 +39,7 @@
 (defun make-fifo-queue-handler ()
   (let* ((head (list))
 	 (tail head))
-    (lambda (&optional (key :view) (arg nil arg-p))
+    (lambda (key &optional (arg nil arg-p))
       (multiple-value-bind (value new-head new-tail)
 	  (%handle-fifo-queue key arg arg-p head tail)
 	(setf head new-head
