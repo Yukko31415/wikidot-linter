@@ -9,7 +9,7 @@
   :author      "Your Name"
   :license     "MIT"
   :version     "0.1.0"
-  :depends-on  ("cl-ppcre" "serapeum" "log4cl" "alexandria")
+  :depends-on  ("cl-ppcre" "serapeum" "log4cl" "alexandria" "metabang-bind")
   :serial t
   :components ((:file "src/package")
 	       (:file "src/wikilinter-fifo-queue")
