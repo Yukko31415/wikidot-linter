@@ -110,5 +110,6 @@
 
 (defpackage #:wikilinter-parser
   (:use #:cl)
+  (:import-from #:bind #:bind)
   (:local-nicknames (#:components #:wikilinter-components))
   (:export #:destruct-ftml-block))
