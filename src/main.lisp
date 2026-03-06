@@ -31,14 +31,14 @@
 (defun main ()
   "Entry point for the application."
   (loop
-    :initially (get-string-and-destruct-ftml)
+   :initially (get-string-and-destruct-ftml)
 
-    :for command := (read-line)
+   :for command := (read-line)
 
-    :until (string= "q" command)
+   :until (string= "q" command)
 
-    :when (string= "n" command)
-      :do (get-string-and-destruct-ftml)
+   :when (string= "n" command)
+   :do (get-string-and-destruct-ftml)
 
-    :finally (format t "終了します...")))
+   :finally (format t "終了します...")))
 

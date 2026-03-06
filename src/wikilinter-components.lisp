@@ -6,16 +6,25 @@
 (defparameter *component-classes* (make-hash-table :test #'equal))
 
 
+(defclass toplevel ()
+  ((content-queue
+    :initform (wikilinter-fifo-queue:make-queue)
+    :reader component-content-queue)))
+
+
+
 (defclass component ()
   ((name :reader component-name)
    (bracketcount :reader component-bracketcount)
    (classp :reader component-classp)
    (params
     :initarg :params
-    :reader component-params)
-   (location
-    :initarg :location
-    :reader component-location)))
+    :reader component-params)))
+
+
+;;
+;; bracket
+
 
 (defclass single-bracket (component)
   ((bracketcount :initform 1)))
@@ -26,25 +35,49 @@
 (defclass triple-bracket (component)
   ((bracketcount :initform 3)))
 
+
+;;
+;; classfied, unclassfied
+
+
 (defclass classified (component)
   ((classp :initform t)
    (end-name :reader component-end-name)
-   (content-queue-handler
-    :initform (wikilinter-fifo-queue:make-fifo-queue-handler)
-    :reader component-content-queue-handler)))
+   (content-queue
+    :initform (wikilinter-fifo-queue:make-queue)
+    :reader component-content-queue)))
 
 (defclass unclassified (component)
   ((classp :initform nil)))
 
 
+;;
+;; util
 
-(defclass toplevel (classified)
-  ((name :initform nil)
-   (end-name :initform nil)))
 
+(define-condition unknown-component (error)
+  ((tagname :initarg :tagname :reader tagname))
+  (:report (lambda (c s) (format s "\"~A\"は存在しないコンポーネントです"
+			    (tagname c)))))
 
 (defun tag->component (tagname)
-  (gethash (string-downcase tagname) *component-classes*))
+  (when tagname
+    (multiple-value-bind (component find)
+	(gethash (string-downcase tagname) *component-classes*)
+      (cl:if find component
+	     (error 'unknown-component :tagname tagname)))))
+
+(defun end-name= (component tagname)
+  (declare (classified component))
+  (string= tagname (component-end-name component)))
+
+(defun end-tag-p (tagname)
+  (alexandria:starts-with #\/ tagname))
+
+(defun push-content (obj component)
+  (declare ((or classified toplevel) component))
+  (wikilinter-fifo-queue:push-queue
+   obj (component-content-queue component)))
 
 
 ;; --------------------------

@@ -6,45 +6,31 @@
 ;; --------------------------------------------------
 
 
-(defgeneric %handle-fifo-queue (key arg arg-p head tail)
-  (:documentation "fifo-queueを扱うためのハンドル関数"))
+(defstruct (queue (:constructor %make-queue))
+  head
+  tail)
 
-(defun %push-fifo-queue (arg head tail)
-  "fifoキューに値をプッシュする関数"
-  (let ((new (list arg)))
-    (if (consp head)
-	(progn (setf (cdr tail) new
-		     tail new)
-	       (values head head tail))
-	(progn (setf head new
-		     tail head)
-	       (values head head tail)))))
+(defun make-queue (&aux (queue nil))
+  (%make-queue :head queue :tail queue))
 
-(defmethod %handle-fifo-queue ((key (eql :push)) arg arg-p head tail)
-  (declare (ignorable arg-p))
-  (if (and arg-p arg)
-      (%push-fifo-queue arg head tail)
-      (values head head tail)))
+(defun push-queue (obj queue)
+  (let ((content (list obj)))
+    (if (queue-head queue)
+	(setf (cdr (queue-tail queue)) content
+	      (queue-tail queue) (cdr (queue-tail queue)))
+	(setf (queue-head queue) content
+	      (queue-tail queue) content))))
 
-(defmethod %handle-fifo-queue ((key (eql :pop)) arg arg-p head tail)
-  (declare (ignorable arg-p))
-  (cond ((eq head tail) (values (pop head) head head))
-	((consp head) (values (pop head) head tail))
-	(t (values nil head head))))
+(defun pop-queue (queue)
+  (cond ((null (queue-head queue)) nil)
+	((= 1 (length (queue-head queue)))
+	 (pop (queue-head queue))
+	 (setf (queue-tail queue) (queue-head queue)))
+	(t (pop (queue-head queue)))))
 
-(defmethod %handle-fifo-queue ((key (eql :view)) arg arg-p head tail)
-  (declare (ignorable arg-p))
-  (values head head tail))
-
-(defun make-fifo-queue-handler ()
-  (let* ((head (list))
-	 (tail head))
-    (lambda (key &optional (arg nil arg-p))
-      (multiple-value-bind (value new-head new-tail)
-	  (%handle-fifo-queue key arg arg-p head tail)
-	(setf head new-head
-	      tail new-tail)
-	value))))
+(defun print-queue-list (queue &optional stream)
+  (print (queue-head queue) stream)
+  queue)
 
 
 

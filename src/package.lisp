@@ -5,22 +5,18 @@
 ;;; Copyright (C) 2025 Your Name
 
 
-
 (defpackage #:wikidot-linter
   (:use #:cl)
   (:documentation "The wikidot-linter package.")
   (:export #:main))
 
 
-(defpackage #:wikilinter-parser
-  (:use #:cl)
-  (:export #:destruct-ftml-block))
-
-
 (defpackage #:wikilinter-fifo-queue
   (:use #:cl)
-  (:export #:make-fifo-queue-handler))
-
+  (:export #:make-queue
+	   #:push-queue
+	   #:pop-queue
+	   #:print-queue-list))
 
 
 (defpackage #:wikilinter-components
@@ -31,29 +27,36 @@
 	   #:<)
 
   (:export
-   
+
    #:*component-classes*
 
+   #:toplevel
+
+   #:component
+   
    #:component-name
    #:component-bracketcount
    #:component-classp
    #:component-params
-   #:component-content-queue-handler
+   #:component-content-queue
    #:component-end-name
    #:component-location
 
    #:single-bracket
    #:double-bracket
    #:triple-bracket
+
    #:classified
    #:unclassified
-   
-   #:toplevel
 
+   #:unknown-component
    #:tag->component
-   
+   #:end-name=
+   #:push-content
+   #:end-tag-p
+
    #:gallery
-   
+
    #:size
    #:code
    #:collapsible
@@ -81,7 +84,7 @@
    #:cell
 
 
-   
+
    #:toc
    #:f>toc
    #:f<toc
@@ -102,3 +105,10 @@
    #:button
    #:expr
    #:if))
+
+
+
+(defpackage #:wikilinter-parser
+  (:use #:cl)
+  (:local-nicknames (#:components #:wikilinter-components))
+  (:export #:destruct-ftml-block))
