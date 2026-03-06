@@ -14,6 +14,8 @@ log4cl, ghcr.io/ocicl/log4cl@sha256:bd33f6e5ad346892e852492e7101bc18d263f9ef2ba6
 log4cl-examples, ghcr.io/ocicl/log4cl@sha256:bd33f6e5ad346892e852492e7101bc18d263f9ef2ba6192178568d1b20337112, log4cl-20240503-fe3da51/log4cl-examples.asd
 log4cl.log4slime, ghcr.io/ocicl/log4cl@sha256:bd33f6e5ad346892e852492e7101bc18d263f9ef2ba6192178568d1b20337112, log4cl-20240503-fe3da51/log4cl.log4slime.asd
 log4cl.log4sly, ghcr.io/ocicl/log4cl@sha256:bd33f6e5ad346892e852492e7101bc18d263f9ef2ba6192178568d1b20337112, log4cl-20240503-fe3da51/log4cl.log4sly.asd
+metabang-bind, ghcr.io/ocicl/metabang-bind@sha256:73afec9ebc359c41fa430eeee0dafcc91aebdbac0c790eeb2202c15e90acc63b, metabang-bind-20240503-0819642/metabang-bind.asd
+metabang-bind-test, ghcr.io/ocicl/metabang-bind@sha256:73afec9ebc359c41fa430eeee0dafcc91aebdbac0c790eeb2202c15e90acc63b, metabang-bind-20240503-0819642/metabang-bind-test.asd
 parse-declarations-1.0, ghcr.io/ocicl/parse-declarations-1.0@sha256:9305fa9624205b16fd1fc51cb1cc4282a18e50eee9ac75b66a14f6f2c5df9518, parse-declarations-20240503-549aebb/parse-declarations-1.0.asd
 parse-number, ghcr.io/ocicl/parse-number@sha256:11f3f9f512871e1f96cea6b8260aa3610e34e8fd7272bbcdb210fd3c5dd8025c, parse-number-20240503-cb9e487/parse-number.asd
 serapeum, ghcr.io/ocicl/serapeum@sha256:c29107525dce97b63a2c8521ad00ef1581d484cd0729ea64433059b9f9fb38cc, serapeum-20251216-0f87830/serapeum.asd
