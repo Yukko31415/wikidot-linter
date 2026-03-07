@@ -41,9 +41,10 @@ jobs:
       - name: Build Executable
         shell: bash
         run: |
-          # ASDFがカレントディレクトリの.asdを見つけられるように設定し、makeを叩く
           sbcl --non-interactive \
-               --eval '(push (uiop:getcwd) asdf:*central-registry*)' \
+               --eval '(require :asdf)' \
+               --eval '(require :uiop)' \
+               --eval '(asdf:initialize-source-registry (list :source-registry :inherit-configuration (list :tree (uiop:getcwd))))' \
                --eval '(asdf:make :wikidot-linter)'
 
       # ========================================
