@@ -14,21 +14,41 @@ jobs:
     
     runs-on: ${{ matrix.os }}
     
-    env:
-      LISP: sbcl-bin
-
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install Lisp
-        uses: 40ants/setup-lisp@v4
-        with:
-          asdf-system: wikidot-linter
-
-      - name: Build Executable
+      # ========================================
+      # 1. 各OSでSBCLを直接インストール
+      # ========================================
+      - name: Install SBCL (Linux)
+        if: runner.os == 'Linux'
         run: |
-          ros -e '(asdf:make "wikidot-linter")'
+          sudo apt-get update
+          sudo apt-get install -y sbcl
 
+      - name: Install SBCL (macOS)
+        if: runner.os == 'macOS'
+        run: brew install sbcl
+
+      - name: Install SBCL (Windows)
+        if: runner.os == 'Windows'
+        shell: powershell
+        run: choco install -y sbcl
+
+      # ========================================
+      # 2. ビルド実行 (setup.lispを作らずにワンライナーで完結)
+      # ========================================
+      - name: Build Executable
+        shell: bash
+        run: |
+          # ASDFがカレントディレクトリの.asdを見つけられるように設定し、makeを叩く
+          sbcl --non-interactive \
+               --eval '(push (uiop:getcwd) asdf:*central-registry*)' \
+               --eval '(asdf:make :wikidot-linter)'
+
+      # ========================================
+      # 3. アーティファクトの回収
+      # ========================================
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
