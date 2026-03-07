@@ -11,8 +11,6 @@
     :initform (wikilinter-fifo-queue:make-queue)
     :reader component-content-queue)))
 
-
-
 (defclass component ()
   ((name :reader component-name)
    (bracketcount :reader component-bracketcount)
@@ -87,7 +85,6 @@
 (defmacro defcomponent (class-name direct-superclasses component-name
 		 &optional (end-name nil end-name-p))
   (let ((slots `((name :initform ,component-name))))
-    
     ;; スーパークラスのリストに 'classified が含まれている場合のみ、
     ;; end-name のスロット定義をリストに追加する
     ;; end-nameが特殊に指定されている場合はそれを用いる
@@ -96,19 +93,14 @@
 					 end-name
 					 (format nil "/~A" component-name)))
 	    slots))
-    
     `(progn
        (defclass ,class-name ,direct-superclasses ,slots)
        (setf (gethash ,component-name *component-classes*) ',class-name))))
 
-
-
-
 (defmacro component-list (direct-superclasses list)
   "defcomponentに展開する"
   (let ((defcomponents
-	  (loop :for (name component-name end-name)
-		  :in list
+	  (loop :for (name component-name end-name) :in list
 		:collect (cl:if end-name
 				`(defcomponent ,name ,direct-superclasses
 				     ,component-name ,end-name)
