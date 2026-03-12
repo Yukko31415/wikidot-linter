@@ -58,8 +58,11 @@
 
 
 
+
 ;;
 ;; ftml-refs
+
+
 
 (declaim (ftype (function (integer parsed-ftml) (values integer integer))
 		ftml-ref-line ftml-ref-loc))
@@ -150,7 +153,8 @@
 ;; --------------------------------------------------
 
 
-
+;;
+;; errors
 
 (define-condition parse-time-log (condition)
   ((condition :initarg :condition :reader log-condition)))
@@ -169,6 +173,8 @@
   (:report (lambda (c s) (format s "~A行目: [[~A]]は無効なタグです"
 			    (crr-line c) (end-name c)))))
 
+;; errors
+;;
 
 
 
@@ -264,7 +270,8 @@
   (handler-bind ((parse-time-log #'(lambda (c) (push (log-condition c) log)))
 		 (invalid-end-tag-name #'(lambda (c) (push c log) (invoke-restart 'ignore))))
     (prog1 (destruct-ftml-block/toplevel parsed-ftml)
-      (format stream "~{~A~%~}" (sort log #'(lambda (a b) (< (crr-line a) (crr-line b))))))))
+      (format stream "~{~A~%~}" (sort log #'(lambda (a b) (< (crr-line a) (crr-line b)))))
+      (terpri))))
 
 
 
