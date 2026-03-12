@@ -62,18 +62,16 @@
   (when tagname
     (multiple-value-bind (component find)
 	(gethash (string-downcase tagname) *component-classes*)
-      (cl:if find component
-	     (error 'unknown-component :tagname tagname)))))
+      (common-lisp:if find component
+		      (error 'unknown-component :tagname tagname)))))
 
 (defun end-name= (component tagname)
-  (declare (classified component))
   (string= tagname (component-end-name component)))
 
 (defun end-tag-p (tagname)
   (alexandria:starts-with #\/ tagname))
 
 (defun push-content (obj component)
-  (declare ((or classified toplevel) component))
   (wikilinter-fifo-queue:push-queue
    obj (component-content-queue component)))
 
@@ -89,7 +87,7 @@
     ;; end-name のスロット定義をリストに追加する
     ;; end-nameが特殊に指定されている場合はそれを用いる
     (when (member 'classified direct-superclasses)
-      (push `(end-name :initform ,(cl:if end-name-p
+      (push `(end-name :initform ,(common-lisp:if end-name-p
 					 end-name
 					 (format nil "/~A" component-name)))
 	    slots))
@@ -101,7 +99,7 @@
   "defcomponentに展開する"
   (let ((defcomponents
 	  (loop :for (name component-name end-name) :in list
-		:collect (cl:if end-name
+		:collect (common-lisp:if end-name
 				`(defcomponent ,name ,direct-superclasses
 				     ,component-name ,end-name)
 				`(defcomponent ,name ,direct-superclasses
