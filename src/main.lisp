@@ -11,15 +11,14 @@
 
 
 (defun get-string-from-file ()
-  (format t "ファイルパスを入力: ")
-  (finish-output)
-  (handler-case
-      (prog1 (uiop:read-file-string (uiop:parse-native-namestring (read-line)))
-	(terpri))
-    (sb-ext:file-does-not-exist ()
-      (format t "ファイルが見つかりませんでした。もう一度入力してください。~%")
-      (finish-output)
-      (get-string-from-file))))
+  (loop (format t "ファイルパスを入力: ") (finish-output)
+	(handler-bind ((error
+			 (lambda (c) (declare (ignore c)) (invoke-restart 'retry))))
+	  (restart-case
+	      (return (prog1 (uiop:read-file-string (uiop:parse-native-namestring (read-line)))
+			(terpri)))
+	    (retry () (format t "ファイルが見つかりませんでした。もう一度入力してください。~%")
+	      (finish-output))))))
 
 (defun get-string-and-destruct-ftml ()
   (let ((textdata (get-string-from-file)))
@@ -40,5 +39,5 @@
    :when (string= "n" command)
    :do (get-string-and-destruct-ftml)
 
-   :finally (format t "終了します...")))
+   :finally (format t "終了します...") (uiop:quit)))
 
