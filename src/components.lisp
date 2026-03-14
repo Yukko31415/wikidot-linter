@@ -1,5 +1,5 @@
 
-(in-package #:wikilinter-components)
+(in-package #:wdlinter-components)
 
 
 
@@ -8,7 +8,7 @@
 
 (defclass toplevel ()
   ((content-queue
-    :initform (wikilinter-fifo-queue:make-queue)
+    :initform (wdlinter-fifo-queue:make-queue)
     :reader component-content-queue)))
 
 (defclass component ()
@@ -42,7 +42,7 @@
   ((classp :initform t)
    (end-name :reader component-end-name)
    (content-queue
-    :initform (wikilinter-fifo-queue:make-queue)
+    :initform (wdlinter-fifo-queue:make-queue)
     :reader component-content-queue)))
 
 (defclass unclassified (component)
@@ -72,7 +72,7 @@
   (alexandria:starts-with #\/ tagname))
 
 (defun push-content (obj component)
-  (wikilinter-fifo-queue:push-queue
+  (wdlinter-fifo-queue:push-queue
    obj (component-content-queue component)))
 
 

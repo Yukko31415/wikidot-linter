@@ -1,5 +1,5 @@
 
-(in-package #:wikilinter-fifo-queue)
+(in-package #:wdlinter-fifo-queue)
 
 ;; --------------------------------------------------
 ;; make-fifo-queue-handler
