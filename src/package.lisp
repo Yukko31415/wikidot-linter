@@ -11,7 +11,7 @@
   (:export #:main))
 
 
-(defpackage #:wikilinter-fifo-queue
+(defpackage #:wdlinter-fifo-queue
   (:use #:cl)
   (:export #:make-queue
 	   #:push-queue
@@ -19,7 +19,7 @@
 	   #:print-queue-list))
 
 
-(defpackage #:wikilinter-components
+(defpackage #:wdlinter-components
   (:use #:cl)
   (:shadow #:if
 	   #:=
@@ -54,8 +54,6 @@
    #:end-name=
    #:push-content
    #:end-tag-p
-
-   #:gallery
 
    #:size
    #:code
@@ -108,8 +106,8 @@
 
 
 
-(defpackage #:wikilinter-parser
+(defpackage #:wdlinter-parser
   (:use #:cl)
   (:import-from #:bind #:bind)
-  (:local-nicknames (#:components #:wikilinter-components))
+  (:local-nicknames (#:components #:wdlinter-components))
   (:export #:destruct-ftml-block))

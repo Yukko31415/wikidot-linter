@@ -70,5 +70,5 @@ jobs:
         with:
           name: wikidot-linter-${{ matrix.os }}
           path: |
-            wikilinter
-            wikilinter.exe
+            wdlinter
+            wdlinter.exe

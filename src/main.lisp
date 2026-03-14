@@ -22,7 +22,7 @@
 
 (defun get-string-and-destruct-ftml ()
   (let ((textdata (get-string-from-file)))
-    (time (wikilinter-parser:destruct-ftml-block textdata))
+    (time (wdlinter-parser:destruct-ftml-block textdata))
     (format t "qで終了/nで次のファイル~%")
     (finish-output)))
 
@@ -40,4 +40,5 @@
    :do (get-string-and-destruct-ftml)
 
    :finally (format t "終了します...") (uiop:quit)))
+
 
