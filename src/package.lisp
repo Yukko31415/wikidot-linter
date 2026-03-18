@@ -13,101 +13,137 @@
 
 (defpackage #:wdlinter-fifo-queue
   (:use #:cl)
+  (:import-from #:bind #:bind)
   (:export #:make-queue
-	   #:push-queue
+	   #:merge-queue
 	   #:pop-queue
-	   #:print-queue-list))
+	   #:print-queue-list
+	   #:push-queue)
+  (:export #:queue))
 
 
-(defpackage #:wdlinter-components
+(defpackage #:wdlinter-component.internal
   (:use #:cl)
-  (:shadow #:if
+  (:export #:*component-classes*)
+  (:export #:component-list #:defcomponent))
+
+
+(defpackage #:wdlinter-component
+  (:use #:cl #:wdlinter-component.internal)
+  (:local-nicknames (#:fifo-queue #:wdlinter-fifo-queue))
+  (:shadow #:if #:= #:> #:<)
+  (:export #:unknown-component)
+  (:export #:component-name #:end-name= #:end-tag-p #:merge-content-queue
+	   #:push-content #:tag->component)
+  (:export #:*user
+	   #:<
+	   #:<image
 	   #:=
+	   #:=image
 	   #:>
-	   #:<)
-
-  (:export
-
-   #:*component-classes*
-
-   #:toplevel
-
-   #:component
-   
-   #:component-name
-   #:component-bracketcount
-   #:component-classp
-   #:component-params
-   #:component-content-queue
-   #:component-end-name
-   #:component-location
-
-   #:single-bracket
-   #:double-bracket
-   #:triple-bracket
-
-   #:classified
-   #:unclassified
-
-   #:unknown-component
-   #:tag->component
-   #:end-name=
-   #:push-content
-   #:end-tag-p
-
-   #:size
-   #:code
-   #:collapsible
-   #:note
-   #:html
-   #:span
-   #:div
-   #:div_
-   #:math
-   #:footnote
-   #:module
-   #:iftags
-   #:tabview
-   #:tab
-   #:bibliography
-   #:a
-   #:a_
-   #:=
-   #:>
-   #:<
-   #:ul
-   #:li
-   #:table
-   #:row
-   #:cell
-
-
-
-   #:toc
-   #:f>toc
-   #:f<toc
-   #:image
-   #:=image
-   #:<image
-   #:>image
-   #:f<image
-   #:f>image
-   #:eref
-   #:footnoteblock
-   #:include
-   #:date
-   #:file
-   #:user
-   #:*user
-   #:social
-   #:button
-   #:expr
-   #:if))
-
+	   #:>image
+	   #:a
+	   #:a_
+	   #:bibliography
+	   #:button
+	   #:cell
+	   #:classified
+	   #:code
+	   #:collapsible
+	   #:component
+	   #:date
+	   #:div
+	   #:div_
+	   #:double-bracket
+	   #:eref
+	   #:expr
+	   #:f<image
+	   #:f<toc
+	   #:f>image
+	   #:f>toc
+	   #:file
+	   #:flexible
+	   #:flickrgallery
+	   #:footnote
+	   #:footnoteblock
+	   #:gallery
+	   #:hashtag
+	   #:html
+	   #:if
+	   #:iftags
+	   #:image
+	   #:include
+	   #:li
+	   #:math
+	   #:module
+	   #:module/adsenseunit
+	   #:module/backlinks
+	   #:module/categories
+	   #:module/childpages
+	   #:module/clone
+	   #:module/comments
+	   #:module/countpages
+	   #:module/css
+	   #:module/featuredsite
+	   #:module/feed
+	   #:module/files
+	   #:module/frontforum
+	   #:module/join
+	   #:module/listdrafts
+	   #:module/listpages
+	   #:module/listusers
+	   #:module/mailform
+	   #:module/managesite
+	   #:module/members
+	   #:module/membershipbypassword
+	   #:module/miniactivethreads
+	   #:module/minirecentposts
+	   #:module/minirecentthreads
+	   #:module/newpage
+	   #:module/nextpage
+	   #:module/orphanedpages
+	   #:module/pagecalendar
+	   #:module/pages
+	   #:module/pagesbytag
+	   #:module/pagetree
+	   #:module/petitionadmin
+	   #:module/previospage
+	   #:module/rate
+	   #:module/ratedpages
+	   #:module/recentposts
+	   #:module/redirect
+	   #:module/search
+	   #:module/searchall
+	   #:module/searchusers
+	   #:module/sendinvitations
+	   #:module/simpletodo
+	   #:module/sitechanges
+	   #:module/sitegrid
+	   #:module/tagcloud
+	   #:module/themepreviewer
+	   #:module/wantedpages
+	   #:module/watchers
+	   #:module/whoinvited
+	   #:note
+	   #:row
+	   #:single-bracket
+	   #:size
+	   #:social
+	   #:span
+	   #:tab
+	   #:table
+	   #:tabview
+	   #:toc
+	   #:toplevel
+	   #:triple-bracket
+	   #:ul
+	   #:unclassified
+	   #:user))
 
 
 (defpackage #:wdlinter-parser
   (:use #:cl)
   (:import-from #:bind #:bind)
-  (:local-nicknames (#:components #:wdlinter-components))
+  (:local-nicknames (#:component #:wdlinter-component))
+  (:local-nicknames (#:fifo-queue #:wdlinter-fifo-queue))
   (:export #:destruct-ftml-block))
