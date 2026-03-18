@@ -13,7 +13,7 @@
   :serial t
   :components ((:file "src/package")
 	       (:file "src/fifo-queue")
-	       (:file "src/components")
+	       (:file "src/component")
 	       (:file "src/parser")
                (:file "src/main"))
   :build-operation "program-op"
