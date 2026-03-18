@@ -5,7 +5,7 @@
 
 
 ;;
-;; duplicate-string
+;; ftml-ref
 
 
 (defun duplicate-string (original &key (start 0) (end (length original)))
@@ -13,12 +13,24 @@
 			    :displaced-to original
 			    :displaced-index-offset start))
 
+(defun print-ftml-ref (obj stream)
+  (let ((string (duplicate-string (ftml-ref-string obj)
+				  :start (ftml-ref-start obj)
+				  :end (ftml-ref-end obj))))
+    (format stream "\"~A\"" string)))
+
+(defstruct (ftml-ref (:print-object print-ftml-refA))
+  string
+  start
+  end)
+
+
+
 
 
 ;; --------------------------------------------------
 ;; parse-ftml-text
 ;; --------------------------------------------------
-
 
 (defstruct (parsed-ftml (:constructor %make-parsed-ftml) (:conc-name nil))
   ftml-string
@@ -27,7 +39,7 @@
   ftml-length)
 
 (defun make-loc-list (text)
-  "2重角括弧の開始点のリストを返す"
+  ;; 二重角括弧の開始点をのリストを渡す
   (let* ((pattern (load-time-value (ppcre:create-scanner "(?<!\\[)\\[{2}(?!\\[)")))
 	 (offsets (ppcre:all-matches pattern text))
 	 (result (make-array (1+ (ceiling (length offsets) 2))
@@ -47,7 +59,6 @@
 		    (setf start end))))
     (map 'vector #'f loc)))
 
-
 (defun parse-ftml-text (string)
   (bind (((:values loc length) (make-loc-list string)))
     (%make-parsed-ftml :ftml-string string
@@ -63,12 +74,11 @@
 ;; ftml-refs
 
 
-
 (declaim (ftype (function (integer parsed-ftml) (values integer integer))
 		ftml-ref-line ftml-ref-loc))
 
 (defun ftml-ref-loc (index parsed-ftml)
-  (with-slots (ftml-location ftml-length ftml-string) parsed-ftml
+  (with-slots (ftml-location ftml-length) parsed-ftml
     (when (> ftml-length index)
       (let* ((start (aref ftml-location index))
 	     (end (aref ftml-location (1+ index))))
@@ -80,22 +90,18 @@
       (values (aref ftml-line index)
 	      (aref ftml-line (1+ index))))))
 
-
-
-
 (defun ftml-ref (index parsed-ftml)
   (with-slots (ftml-location ftml-length ftml-string) parsed-ftml
     (when (> ftml-length index)
-      (multiple-value-bind (start end) (ftml-ref-loc index parsed-ftml)
-	(duplicate-string ftml-string :start start :end end)))))
-
-
+      (let* ((start (aref ftml-location index))
+	     (end (aref ftml-location (1+ index))))
+	(make-ftml-ref :string ftml-string :start start :end end)))))
 
 (defun ftml-header (parsed-ftml)
   (with-slots (ftml-location ftml-string) parsed-ftml
     (unless (zerop (aref ftml-location 0))
       (let ((end (aref ftml-location 0)))
-	(duplicate-string ftml-string :start 0 :end end)))))
+	(make-ftml-ref :string ftml-string :start 0 :end end)))))
 
 
 
@@ -104,47 +110,46 @@
 ;; get-tag-and-params
 ;; --------------------------------------------------
 
-
-
 (defun get-block-range-of (text &key (start 0) (end (length text)))
-  "コードブロックとそれ以外の文字列を分ける"
-  (bind ((scanner (load-time-value (ppcre:create-scanner "(?s)(?<!\\[)\\[\\[(?!\\[).*?(?<!\\])\\]\\](?!\\])")))
+  ;; コードブロックとそれ以外を分ける
+  (bind ((scanner (load-time-value
+		   (ppcre:create-scanner "(?s)(?<!\\[)\\[\\[(?!\\[).*?(?<!\\])\\]\\](?!\\])")))
 	 ((:values match-start match-end) (ppcre:scan scanner text :start start :end end)))
     (values match-start match-end)))
-
 
 (defun get-all-whitespace-blocs (text &key (start 0) (end (length text)))
   (let ((scanner (load-time-value (ppcre:create-scanner "[ \\n\\t\\r]+"))))
     (ppcre:all-matches scanner text :start start :end end)))
 
-
-
-
-
-
-(defun get-block-range-of/with-parsed-ftml (index parsed-ftml)
+(defun get-block-range-of/for-parsed-ftml (index parsed-ftml)
   (bind (((:values start end) (ftml-ref-loc index parsed-ftml))
 	 ((:values match-start match-end)
 	  (get-block-range-of (ftml-string parsed-ftml) :start start :end end)))
     (values start end match-start match-end)))
 
+
 (defun get-tag-and-params (index parsed-ftml)
+  ;; get-tag-and-params index parsed-ftml => tag, params, other
+  ;; index = a non negative integer.
+  ;; tag = a ftml-ref object.
+  ;; params = a list of ftml-ref objects.
+  ;; other = a ftml-ref object.
   (bind (((:slots ftml-string) parsed-ftml)
 	 ((:values _ end match-start match-end)
-	  (get-block-range-of/with-parsed-ftml index parsed-ftml))
+	  (get-block-range-of/for-parsed-ftml index parsed-ftml))
 	 ((&optional tag &rest loc-list)
 	  (get-all-whitespace-blocs (ftml-string parsed-ftml) :start match-start :end match-end)))
-    
-    (values (duplicate-string ftml-string :start (+ 2 match-start)
-					  :end (or tag (- match-end 2)))
+
+    (values (make-ftml-ref :string ftml-string :start (+ 2 match-start)
+			   :end (or tag (- match-end 2)))
 	    (loop :for (start end) :on loc-list :by #'cddr
-		  :if end :collect (duplicate-string ftml-string :start start :end end)
-		    :else :if (> (- match-end 2) start)
-			    :collect (duplicate-string ftml-string :start start
-								   :end (- match-end 2))
-		  :end
-		  :while end)
-	    (duplicate-string ftml-string :start match-end :end end))))
+	      :if end :collect (make-ftml-ref :string ftml-string :start start :end end)
+		:else :if (> (- match-end 2) start)
+			:collect (make-ftml-ref :string ftml-string :start start
+						:end (- match-end 2))
+	      :end
+	      :while end)
+	    (make-ftml-ref :string ftml-string :start match-end :end end))))
 
 
 
@@ -156,6 +161,7 @@
 ;;
 ;; errors
 
+
 (define-condition parse-time-log (condition)
   ((condition :initarg :condition :reader log-condition)))
 
@@ -166,35 +172,64 @@
   ((component :initarg :component :reader component)
    (end-name :initarg :end-name :reader end-name))
   (:report (lambda (c s) (format s "~A行目: [[~A]]は[[~A]]の閉じタグではありません"
-			    (crr-line c) (end-name c) (components:component-name (component c))))))
+			    (crr-line c) (end-name c) (component:component-name (component c))))))
 
 (define-condition invalid-end-tag-name (ftml-parse-time-error)
   ((end-name :initarg :end-name :reader end-name))
   (:report (lambda (c s) (format s "~A行目: [[~A]]は無効なタグです"
 			    (crr-line c) (end-name c)))))
 
-;; errors
+
+
 ;;
+;; push-contents
 
 
+(defun %push-contents (component obj)
+  (typecase obj
+    (fifo-queue:queue (component:merge-content-queue component obj))
+    (t (component:push-content obj component))))
 
 (defun push-contents (component &rest args)
-  (mapc #'(lambda (cont) (when cont (components:push-content cont component)))
+  ;; contentがqueueである場合、componentとマージし、
+  ;; そうでない場合、componentのcontent-queueにpushする
+  (mapc #'(lambda (cont) (when cont (%push-contents component cont)))
 	args)
   component)
 
 
+;;
+;; utils
+
+
+(defun end-tag-p/for-ftml-ref (ftml-ref)
+  (with-slots (ftml-ref-string ftml-ref-start) ftml-ref
+    (component:end-tag-p
+     ftml-ref-string :start ftml-ref-start)))
+
+(defun end-name=/for-ftml-ref (component ftml-ref)
+  (with-slots (ftml-ref-string ftml-ref-start ftml-ref-end) ftml-ref
+    (component:end-name= component ftml-ref-string
+			 :start ftml-ref-start
+			 :end ftml-ref-end)))
+
+
+
+
+;;
+;; %destruct-ftml-block
+
 
 (defun %destruct-ftml-block (parsed-ftml counter)
   (multiple-value-bind (tagname params other) (get-tag-and-params counter parsed-ftml)
-    (if (components:end-tag-p tagname) (values tagname other counter)
+    (if (end-tag-p/for-ftml-ref tagname) (values tagname other counter)
 	(multiple-value-bind (content outer counter)
-	    (%%destruct-ftml-block (make-instance (components:tag->component tagname)
+	    (%%destruct-ftml-block (make-instance (component:tag->component tagname)
 						  :params params)
 				   other parsed-ftml counter)
 	  (values content outer counter)))))
 
-(defmacro %destruct-ftml-block/for-toplevel (parsed-ftml counter)
+(defmacro %destruct-ftml-block/on-toplevel (parsed-ftml counter)
   `(handler-bind
        ((unmatch-tag-end-name
 	  #'(lambda (c)
@@ -207,7 +242,7 @@
 (defmacro %destruct-ftml-block/with-handler (component parsed-ftml counter)
   `(handler-bind
        ((unmatch-tag-end-name
-	  #'(lambda (c) (when (components:end-name= ,component (end-name c))
+	  #'(lambda (c) (when (end-name=/for-ftml-ref ,component (end-name c))
 			  (signal 'parse-time-log :condition c)
 			  (invoke-restart 'close-and-rewind)))))
      (%destruct-ftml-block ,parsed-ftml ,counter)))
@@ -216,17 +251,21 @@
 
 
 
+;;
+;; %%destruct-ftml-block
+
+
 (defgeneric %%destruct-ftml-block (component other parsed-ftml crr-loc))
 
-(defmethod %%destruct-ftml-block ((component components:classified)
+(defmethod %%destruct-ftml-block ((component component:classified)
 				  other parsed-ftml crr-loc)
-  (unless (string= "" other) (components:push-content other component))
+  (unless (string= "" other) (component:push-content other component))
   (loop :for counter := (1+ crr-loc) :then (1+ counter)
 	:do (multiple-value-bind (content outer crr-loc)
 		(%destruct-ftml-block/with-handler component parsed-ftml counter)
 	      (etypecase content
-		(components:component (push-contents component content outer))
-		(string (if (components:end-name= component content)
+		(component:component (push-contents component content outer))
+		(string (if (end-name=/for-ftml-ref component content)
 			    (return (values component outer crr-loc))
 			    (restart-case (error 'unmatch-tag-end-name
 						 :component component
@@ -236,25 +275,29 @@
 			      (ignore () (push-contents component content outer))))))
 	      (setf counter crr-loc))))
 
-(defmethod %%destruct-ftml-block ((component components:unclassified)
+(defmethod %%destruct-ftml-block ((component component:unclassified)
 				  other parsed-ftml crr-loc)
   (values component other crr-loc))
 
 
 
 
+;;
+;; destruct-ftml-block/toplevel
+
 
 (defun destruct-ftml-block/toplevel (parsed-ftml)
-  (let ((toplevel (make-instance 'components:toplevel))
+  (let ((toplevel (make-instance 'component:toplevel))
 	(header (ftml-header parsed-ftml)))
-    (when header (components:push-content header toplevel))
+    (when header (component:push-content header toplevel))
     (loop :for counter := 0 :then (1+ counter)
 	  :while (> (ftml-length parsed-ftml) counter)
 	  :do (multiple-value-bind (content outer crr-loc)
-		  (%destruct-ftml-block/for-toplevel parsed-ftml counter)
+		  (%destruct-ftml-block/on-toplevel parsed-ftml counter)
 		(push-contents toplevel content outer)
 		(setf counter crr-loc)))
     toplevel))
+
 
 
 
@@ -266,7 +309,8 @@
 
 
 (defun destruct-ftml-block (string &key (stream t) &aux (parsed-ftml (parse-ftml-text string))
-						     (log nil))
+						 (log nil))
+  "ftmlブロックを作成する。エラーを出力し、toplevelコンポーネントを返す"
   (declare (type simple-string string))
   (handler-bind ((parse-time-log #'(lambda (c) (push (log-condition c) log)))
 		 (invalid-end-tag-name #'(lambda (c) (push c log) (invoke-restart 'ignore))))
