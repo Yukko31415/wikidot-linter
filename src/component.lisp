@@ -6,47 +6,65 @@
 
 (in-package #:wdlinter-component.internal)
 
-
-(defparameter *component-classes* (make-hash-table :test #'equal)
-  "コンポーネント名をキーにクラスを保存するハッシュテーブル")
-
-
-;; ----------------------------
-;; defcomponent, component-list
-;; ----------------------------
-
-(defmacro defcomponent (class-name direct-superclasses component-name
-		 &optional (end-name nil end-name-p))
-  "defcomponent class-name ({superclass-name}*) component-name [end-name] => class-name"
-  (let ((slots `((name :initform ,component-name))))
-    ;; スーパークラスのリストに 'classified が含まれている場合のみ、
-    ;; end-name のスロット定義をリストに追加する
-    ;; end-nameが特殊に指定されている場合はそれを用いる
-    (when (or (member 'classified direct-superclasses)
-	     (member 'flexible direct-superclasses))
-      (push `(end-name :initform ,(if end-name-p end-name
-				      (format nil "/~A" component-name)))
-	    slots))
-    `(progn
-       (defclass ,class-name ,direct-superclasses ,slots
-	 (:documentation ,(format nil "The ~A component class" class-name)))
-       (setf (gethash ,component-name *component-classes*) ',class-name))))
+;; --------------
+;; make-trie-tree
+;; --------------
 
 
-(defmacro component-list (direct-superclasses list)
-  "component-list ({superclass-name}*) ({component}*) => <no values>
-   component ::= (component-name tagname [end-name])
-   superclass-name = a non-nil symbol."
-  (let ((defcomponents
-	  (loop :for (name component-name end-name) :in list
-		:collect (if end-name
-			     `(defcomponent ,name ,direct-superclasses
-				  ,component-name ,end-name)
-			     `(defcomponent ,name ,direct-superclasses
-				  ,component-name)))))
-    `(progn ,@defcomponents
-	    (values))))
+;;
+;; trie-tree
 
+(defstruct (trie-tree (:constructor %%make-trie-tree)
+		      (:print-object print-trie-tree))
+  key content)
+
+(defun print-trie-tree (obj stream)
+  (with-slots (key content) obj
+    (format stream "(~A ~A)" key content)))
+
+(defun %make-trie-tree (class-name component-name index &aux (length (length component-name)))
+  (if (= index length)
+      class-name
+      (%%make-trie-tree
+       :key (char component-name index)
+       :content (list (%make-trie-tree class-name component-name (1+ index))))))
+
+;;
+;; make-trie-tree
+
+(defun make-trie-tree (tree class-name component-name &aux (length (length component-name)))
+  "make-trie-tree tree class-name component-name => tree"
+  (labels ((gen-trie-tree (tree index)
+	     (with-slots (key content) tree
+	       (if (= length index) (pushnew class-name content :test #'eq)
+		   (let ((new-tree (find-trie-tree (char component-name index) tree)))
+		     (if new-tree (gen-trie-tree new-tree (1+ index))
+			 (push (%make-trie-tree class-name component-name index) content)))))))
+    (gen-trie-tree tree 0) tree))
+
+;;
+;; component-classes
+
+(defparameter *component-classes* (%%make-trie-tree :key :component :content nil)
+  "コンポーネント名をキーにクラスを保存するトライ木")
+
+;;
+;; find-trie-tree
+
+(defun find-trie-tree (char tree)
+  "find-trie-tree char tree => trie-tree
+   trie-tree = a struct of trie-tree"
+  (when tree (with-slots (key content) tree
+	       (find char (remove-if #'symbolp content)
+		     :key #'trie-tree-key :test #'char=))))
+
+;; 
+;; find-component-name
+
+(defun find-component-name (tree)
+  "find-component-name tree => symbol"
+  (when tree (with-slots (key content) tree
+	       (find-if #'symbolp content))))
 
 
 
@@ -58,6 +76,43 @@
 
 
 (in-package #:wdlinter-component)
+
+
+;; ----------------------------
+;; defcomponent, component-list
+;; ----------------------------
+
+
+(defmacro defcomponent (class-name direct-superclasses component-name
+		 &optional (end-name nil end-name-p))
+  ;; defcomponent class-name ({superclass-name}*) component-name [end-name] => class-name
+  (let ((slots `((name :initform ,component-name))))
+    ;; スーパークラスのリストに 'classified が含まれている場合のみ、
+    ;; end-name のスロット定義をリストに追加する
+    ;; end-nameが特殊に指定されている場合はそれを用いる
+    (when (intersection direct-superclasses '(flexible classified))
+      (push `(end-name :initform ,(cl:if end-name-p end-name
+					 (format nil "/~A" component-name)))
+	    slots))
+    `(progn
+       (defclass ,class-name ,direct-superclasses ,slots
+	 (:documentation ,(format nil "The ~A component class" class-name)))
+       (make-trie-tree *component-classes* ',class-name ,component-name))))
+
+
+(defmacro component-list (direct-superclasses list)
+  ;; component-list ({superclass-name}*) ({component}*) => <no values>
+  ;; component ::= (component-name tagname [end-name])
+  ;; superclass-name = a non-nil symbol.
+  (let ((defcomponents
+	  (loop :for (name component-name end-name) :in list
+		:collect (cl:if end-name
+				`(defcomponent ,name ,direct-superclasses
+				     ,component-name ,end-name)
+				`(defcomponent ,name ,direct-superclasses
+				     ,component-name)))))
+    `(progn ,@defcomponents
+	    (values))))
 
 
 (defclass toplevel ()
