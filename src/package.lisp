@@ -31,7 +31,7 @@
 
 
 (uiop:define-package #:wdlinter-component
-  (:use #:cl #:wdlinter-component.internal)
+  (:mix #:cl #:wdlinter-component.internal #:serapeum)
   (:local-nicknames (#:fifo-queue #:wdlinter-fifo-queue))
   (:shadow #:if #:= #:> #:<)
   (:export #:unknown-component)
@@ -147,7 +147,7 @@
 
 
 (uiop:define-package #:wdlinter-parser
-  (:use #:cl)
+  (:mix #:cl #:serapeum)
   (:import-from #:bind #:bind)
   (:local-nicknames (#:component #:wdlinter-component))
   (:local-nicknames (#:fifo-queue #:wdlinter-fifo-queue))
