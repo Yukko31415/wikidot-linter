@@ -200,11 +200,10 @@
   (string= end-tagname (component-end-name component)
 	   :start1 start :end1 end))
 
-(defun end-tag-p (end-tagname &key (start 0))
-  "end-tag-p end-tagname &key start => {t | nil}
-   end-tagname = a string designator.
-   start = a bounding index designator."
-  (string= end-tagname "/" :start1 start :end1 (1+ start)))
+(defun end-tag-p (end-tagname &optional (start 0) &aux (end (1+ start)))
+  "end-tag-p end-tagname &optional start => {t | nil}
+   end-tagname = a string designator."
+  (string= "/" end-tagname :start2 start :end2 end))
 
 (defun push-content (obj component)
   "push-content obj component => component"
