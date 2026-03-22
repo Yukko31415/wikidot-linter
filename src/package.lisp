@@ -69,10 +69,8 @@
 	   #:f>toc
 	   #:file
 	   #:flexible
-	   #:flickrgallery
 	   #:footnote
 	   #:footnoteblock
-	   #:gallery
 	   #:hashtag
 	   #:html
 	   #:if
@@ -93,7 +91,9 @@
 	   #:module/featuredsite
 	   #:module/feed
 	   #:module/files
+	   #:module/flickrgallery
 	   #:module/frontforum
+	   #:module/gallery
 	   #:module/join
 	   #:module/listdrafts
 	   #:module/listpages
@@ -102,7 +102,6 @@
 	   #:module/managesite
 	   #:module/members
 	   #:module/membershipbypassword
-	   #:module/miniactivethreads
 	   #:module/minirecentposts
 	   #:module/minirecentthreads
 	   #:module/newpage
