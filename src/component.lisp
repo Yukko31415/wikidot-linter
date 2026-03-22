@@ -196,8 +196,7 @@
 (defun end-name= (component end-tagname &key (start 0) end)
   "end-name= component end-tagname &key start end => {t | nil}
    component = a component class.
-   end-tagname = a string designator.
-   start, end = bounding index designators of sequence. The default for end is nil."
+   end-tagname = a string designator."
   (string= end-tagname (component-end-name component)
 	   :start1 start :end1 end))
 
