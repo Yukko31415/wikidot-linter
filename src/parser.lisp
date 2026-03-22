@@ -8,6 +8,11 @@
 ;; ftml-ref
 
 
+(defstruct (ftml-ref (:print-object print-ftml-ref))
+  string
+  start
+  end)
+
 (defun duplicate-string (original &key (start 0) (end (length original)))
   (make-array (- end start) :element-type 'character
 			    :displaced-to original
@@ -20,10 +25,6 @@
 	(format stream "\"~A\"" string)
 	(format stream "~A" string))))
 
-(defstruct (ftml-ref (:print-object print-ftml-refA))
-  string
-  start
-  end)
 
 
 
