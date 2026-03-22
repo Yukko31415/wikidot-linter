@@ -178,14 +178,20 @@
 			    (tagname c))))
   (:documentation "コンポーネントが発見できない場合に発生するエラー"))
 
-(defun tag->component (tagname)
-  "tag->component tagname => component
-   tagname = a string designator."
-  (when tagname
-    (multiple-value-bind (component find)
-	(gethash (string-downcase tagname) *component-classes*)
-      (common-lisp:if find component
-		      (error 'unknown-component :tagname tagname)))))
+(defun tag->component (string &key (start 0) end)
+  "tag->component tagname &key start end => component
+   tagname = a string designator.
+   start, end = bounding index designators of sequence. The default for end is nil."
+  (loop :with tree := *component-classes*
+	:for index :from start :below (or end (length string))
+	:for char := (aref string index)
+	:collect char :into tagname
+	:do (setf tree (find-trie-tree char tree))
+	:finally (return (or (find-component-name tree)
+			     (error 'unknown-component
+				    :tagname (concatenate 'string tagname))))))
+
+
 
 (defun end-name= (component end-tagname &key (start 0) end)
   "end-name= component end-tagname &key start end => {t | nil}
