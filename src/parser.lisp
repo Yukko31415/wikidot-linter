@@ -55,9 +55,9 @@
   (count #\Newline str :start start :end end))
 
 (defun count-lines (str loc &aux (line 0) (start 0))
-  (flet ((f (end) (prog1 (incf line (%count-lines str start end))
-		    (setf start end))))
-    (map 'vector #'f loc)))
+  (flet ((fn (end) (prog1 (incf line (%count-lines str start end))
+		     (setf start end))))
+    (map 'vector #'fn loc)))
 
 (defun parse-ftml-text (string)
   (bind (((:values loc length) (make-loc-list string)))
