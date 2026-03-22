@@ -5,13 +5,13 @@
 ;;; Copyright (C) 2025 Your Name
 
 
-(defpackage #:wikidot-linter
+(uiop:define-package #:wikidot-linter
   (:use #:cl)
   (:documentation "The wikidot-linter package.")
   (:export #:main))
 
 
-(defpackage #:wdlinter-fifo-queue
+(uiop:define-package #:wdlinter-fifo-queue
   (:use #:cl)
   (:import-from #:bind #:bind)
   (:export #:make-queue
@@ -22,19 +22,25 @@
   (:export #:queue))
 
 
-(defpackage #:wdlinter-component.internal
+(uiop:define-package #:wdlinter-component.internal
   (:use #:cl)
   (:export #:*component-classes*)
-  (:export #:component-list #:defcomponent))
+  (:export #:find-component-name
+	   #:find-trie-tree
+	   #:make-trie-tree))
 
 
-(defpackage #:wdlinter-component
+(uiop:define-package #:wdlinter-component
   (:use #:cl #:wdlinter-component.internal)
   (:local-nicknames (#:fifo-queue #:wdlinter-fifo-queue))
   (:shadow #:if #:= #:> #:<)
   (:export #:unknown-component)
-  (:export #:component-name #:end-name= #:end-tag-p #:merge-content-queue
-	   #:push-content #:tag->component)
+  (:export #:component-name
+	   #:end-name=
+	   #:end-tag-p
+	   #:merge-content-queue
+	   #:push-content
+	   #:tag->component)
   (:export #:*user
 	   #:<
 	   #:<image
@@ -141,7 +147,7 @@
 	   #:user))
 
 
-(defpackage #:wdlinter-parser
+(uiop:define-package #:wdlinter-parser
   (:use #:cl)
   (:import-from #:bind #:bind)
   (:local-nicknames (#:component #:wdlinter-component))
