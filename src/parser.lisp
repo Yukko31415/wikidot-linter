@@ -195,7 +195,9 @@
 (defun %push-contents (component obj)
   (typecase obj
     (fifo-queue:queue (component:merge-content-queue component obj))
-    (t (component:push-content obj component))))
+    (ftml-ref (unless (= (ftml-ref-start obj) (ftml-ref-end obj))
+		(component:push-content  obj component)))
+    (t (component:push-content  obj component))))
 
 (defun push-contents (component &rest args)
   ;; contentがqueueである場合、componentとマージし、
