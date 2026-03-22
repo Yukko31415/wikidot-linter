@@ -286,10 +286,10 @@
 ;; modules
 
 
-(defcomponent module (double-bracket classified)  "module")
+(defcomponent module (double-bracket)  "module")
 
 (component-list
- (double-bracket classified)
+ (double-bracket classified module)
  ((module/countpages "countpages" "/module")
   (module/listusers "listusers" "/module")
   (module/pagecalendar "pagecalendar" "/module")
@@ -343,7 +343,7 @@
 
 
 (component-list
- (double-bracket flexible)
+ (double-bracket flexible module)
  ((module/listpages "listpages" "/module")
   (module/rate "rate" "/module")
   (module/gallery "gallery")))
