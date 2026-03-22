@@ -14,10 +14,11 @@
 			    :displaced-index-offset start))
 
 (defun print-ftml-ref (obj stream)
-  (let ((string (duplicate-string (ftml-ref-string obj)
-				  :start (ftml-ref-start obj)
-				  :end (ftml-ref-end obj))))
-    (format stream "\"~A\"" string)))
+  (bind (((:slots string start end) obj)
+	 (string (duplicate-string string :start start :end end)))
+    (if *print-escape*
+	(format stream "\"~A\"" string)
+	(format stream "~A" string))))
 
 (defstruct (ftml-ref (:print-object print-ftml-refA))
   string
