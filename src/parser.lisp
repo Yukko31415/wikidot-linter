@@ -34,11 +34,16 @@
 ;;;; ---------------
 
 
-(defstruct (parsed-ftml (:constructor %make-parsed-ftml) (:conc-name nil))
+(defstruct (parsed-ftml (:constructor %make-parsed-ftml) (:conc-name nil)
+			(:print-object print-parsed-ftml)) 
   ftml-string
   ftml-line
   ftml-location
   ftml-length)
+
+(defun print-parsed-ftml (obj stream)
+  (print-unreadable-object (obj stream)
+    (format stream "parsed-ftml length: ~A" (ftml-length obj))))
 
 (defun make-loc-list (text)
   ;; 二重角括弧の開始点をのリストを渡す
