@@ -203,7 +203,6 @@
   (string= end-tagname (component-end-name component)
 	   :start1 start :end1 end))
 
-(defun end-tag-p (end-tagname &optional (start 0) &aux (end (1+ start)))
 
 ;;
 ;; end-tag-p
