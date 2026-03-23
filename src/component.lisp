@@ -167,10 +167,12 @@
   (:documentation "階層構造を構成する場合があるコンポネーント"))
 
 
+;; ---------
+;;;; utils
+;; ---------
 
 ;;
-;; util
-
+;; tag->component
 
 (define-condition unknown-component (error)
   ((tagname :initarg :tagname :reader tagname))
@@ -191,7 +193,8 @@
 			     (error 'unknown-component
 				    :tagname (concatenate 'string tagname))))))
 
-
+;; 
+;; end-name=
 
 (defun end-name= (component end-tagname &key (start 0) end)
   "end-name= component end-tagname &key start end => {t | nil}
@@ -217,9 +220,10 @@
 
 
 
-;;;; --------------
+
+;; ------------------
 ;;;; component-list
-;;;; --------------
+;; ------------------
 
 
 ;;
