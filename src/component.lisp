@@ -159,7 +159,11 @@
   ((classp :initform nil))
   (:documentation "階層構造を構成しないコンポネーント"))
 
-(defclass flexible (classified unclassified) ()
+(defclass flexible (component)
+  ((classp :accessor component-classp)
+   (end-name :reader component-end-name)
+   (content-queue :initform (fifo-queue:make-queue)
+		  :reader component-content-queue))
   (:documentation "階層構造を構成する場合があるコンポネーント"))
 
 
