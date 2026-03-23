@@ -22,7 +22,7 @@
 
 (defun get-string-and-destruct-ftml ()
   (let ((textdata (get-string-from-file)))
-    (time (wdlinter-parser:destruct-ftml-block textdata))
+    (time (wdlinter-parser:parse-ftml textdata))
     (format t "qで終了/nで次のファイル~%")
     (finish-output)))
 
