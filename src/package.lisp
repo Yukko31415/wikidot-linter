@@ -151,4 +151,4 @@
   (:import-from #:bind #:bind)
   (:local-nicknames (#:component #:wdlinter-component))
   (:local-nicknames (#:fifo-queue #:wdlinter-fifo-queue))
-  (:export #:destruct-ftml-block))
+  (:export #:parse-ftml))
