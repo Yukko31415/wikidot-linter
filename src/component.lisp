@@ -1,15 +1,14 @@
 
-;;;; --------
-;;;; internal
-;;;; --------
+
+#|---------- wdlinter-component.internal ----------|#
+
 
 
 (in-package #:wdlinter-component.internal)
 
-;; --------------
-;; make-trie-tree
-;; --------------
-
+;; ------------------
+;;;; make-trie-tree
+;; ------------------
 
 ;;
 ;; trie-tree
@@ -69,22 +68,19 @@
 
 
 
-
-;;;; ------------------
-;;;; wdlinter-component
-;;;; ------------------
+#|---------- wdlinter-component ----------|#
 
 
 (in-package #:wdlinter-component)
 
 
-;; ----------------------------
-;; defcomponent, component-list
-;; ----------------------------
+;; --------------------------------
+;;;; defcomponent, component-list
+;; --------------------------------
 
 
 (defmacro defcomponent (class-name direct-superclasses component-name
-		 &optional (end-name nil end-name-p))
+			&optional (end-name nil end-name-p))
   ;; defcomponent class-name ({superclass-name}*) component-name [end-name] => class-name
   (let ((slots `((name :initform ,component-name))))
     ;; スーパークラスのリストに 'classified が含まれている場合のみ、
