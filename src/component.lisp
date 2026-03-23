@@ -241,7 +241,7 @@
 ;; double-bracket, classified
 
 (component-list
- (double-bracket classified)
+ (classified double-bracket)
  ((size "size")
   (code "code")
   (collapsible "collapsible")
@@ -273,7 +273,7 @@
 ;; double-bracket, unclassified
 
 (component-list
- (double-bracket unclassified)
+ (unclassified double-bracket)
  ((toc "toc")
   (f>toc "f>toc")
   (f<toc "f<toc")
