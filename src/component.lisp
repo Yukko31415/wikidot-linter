@@ -204,9 +204,15 @@
 	   :start1 start :end1 end))
 
 (defun end-tag-p (end-tagname &optional (start 0) &aux (end (1+ start)))
+
+;;
+;; end-tag-p
+
+(defun end-tag-p (end-tagname &optional (start 0))
   "end-tag-p end-tagname &optional start => {t | nil}
-   end-tagname = a string designator."
-  (string= "/" end-tagname :start2 start :end2 end))
+   end-tagname = a string."
+  (char= #\/ (char end-tagname start)))
+
 
 (defun push-content (obj component)
   "push-content obj component => component"
