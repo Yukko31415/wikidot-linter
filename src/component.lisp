@@ -213,10 +213,15 @@
    end-tagname = a string."
   (char= #\/ (char end-tagname start)))
 
+;;
+;; push-content
 
 (defun push-content (obj component)
   "push-content obj component => component"
   (fifo-queue:push-queue obj (component-content-queue component)))
+
+;;
+;; merge-content-queue
 
 (defun merge-content-queue (component content-queue)
   "merge-content-queue component content-queue => component"
