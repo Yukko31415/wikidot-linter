@@ -20,7 +20,7 @@
 	    (retry () (format t "ファイルが見つかりませんでした。もう一度入力してください。~%")
 	      (finish-output))))))
 
-(defun get-string-and-destruct-ftml ()
+(defun parse-ftml-from-string ()
   (let ((textdata (get-string-from-file)))
     (time (wdlinter-parser:parse-ftml textdata))
     (format t "qで終了/nで次のファイル~%")
@@ -30,15 +30,15 @@
 (defun main ()
   "Entry point for the application."
   (loop
-   :initially (get-string-and-destruct-ftml)
+    :initially (parse-ftml-from-string)
 
-   :for command := (read-line)
+    :for command := (read-line)
 
-   :until (string= "q" command)
+    :until (string= "q" command)
 
-   :when (string= "n" command)
-   :do (get-string-and-destruct-ftml)
+    :when (string= "n" command)
+      :do (parse-ftml-from-string)
 
-   :finally (format t "終了します...") (uiop:quit)))
+    :finally (format t "終了します...") (uiop:quit)))
 
 
