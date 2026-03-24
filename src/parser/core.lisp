@@ -327,19 +327,21 @@
 
 
 ;; -----------------------
-;;;; make-ftml-component
+;;;; parse-ftml
 ;; -----------------------
 
 
-(defun parse-ftml (string &key (stream nil) &aux (indexed-ftml (make-indexed-ftml string))
-						 (log nil))
-  "parse-ftml string &key stream => component-toplevel"
-  (declare (type simple-string string))
-  (handler-bind ((parse-time-log #'(lambda (c) (push (log-condition c) log)))
-		 (invalid-end-tag-name #'(lambda (c) (push c log) (invoke-restart 'ignore))))
-    (prog1 (make-ftml-component/toplevel indexed-ftml)
-      (format stream "~{~A~%~}" (sort log #'(lambda (a b) (< (crr-line a) (crr-line b)))))
-      (terpri))))
+(defun parse-ftml (string &optional (print-log nil) (stream *standard-output*)
+	       &aux (indexed-ftml (make-indexed-ftml string)) (log nil))
+  "parse-ftml string &optional print-log stream => component-toplevel"
+  (if print-log
+      (handler-bind ((parse-time-log #'(lambda (c) (push (log-condition c) log)))
+		     (invalid-end-tag-name #'(lambda (c) (push c log) (invoke-restart 'ignore))))
+	(prog1 (make-ftml-component/toplevel indexed-ftml)
+	  (format stream "~{~A~%~}" (sort log #'(lambda (a b) (< (crr-line a) (crr-line b)))))
+	  (terpri stream)))
+      (handler-bind ((invalid-end-tag-name #'(lambda (c) (declare (ignore c)) (invoke-restart 'ignore))))
+	(make-ftml-component/toplevel indexed-ftml))))
 
 
 
