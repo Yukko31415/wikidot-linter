@@ -49,9 +49,9 @@
   ;; 二重角括弧の開始点をのリストを渡す
   (let* ((pattern (load-time-value (ppcre:create-scanner "(?<!\\[)\\[{2}(?!\\[)")))
 	 (offsets (ppcre:all-matches pattern text))
-	 (result (make-array (1+ (ceiling (length offsets) 2)))))
-    (when offsets (loop :for index :from 0
-			:for ofs :in offsets :by #'cddr
+	 (result (make-array (1+ (ceiling (length offsets) 2)) :element-type 'fixnum)))
+    (when offsets (loop :for ofs :in offsets :by #'cddr
+			:and index :from 0
 			:do (setf (aref result index) ofs)
 			:count ofs :into length
 			:finally (setf (aref result (1+ index)) (length text))
