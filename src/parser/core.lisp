@@ -315,7 +315,7 @@
 (defun make-ftml-component/toplevel (indexed-ftml)
   (let ((toplevel (make-instance 'component:toplevel))
 	(header (ftml-header indexed-ftml)))
-    (when header (push-contents  toplevel header))
+    (when header (push-contents toplevel header))
     (loop :for counter :from 0 :below (ftml-length indexed-ftml)
 	  :do (multiple-value-bind (content outer crr-loc)
 		  (make-ftml-component/on-toplevel indexed-ftml counter)
