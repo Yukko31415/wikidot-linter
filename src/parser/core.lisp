@@ -61,17 +61,26 @@
   (declare (type simple-string str))
   (count #\Newline str :start start :end end))
 
-(defun count-lines (str loc &aux (line 0) (start 0))
-  (flet ((fn (end) (prog1 (incf line (%count-lines str start end))
-		     (setf start end))))
-    (map 'vector #'fn loc)))
+
+(-> count-lines (simple-string simple-array fixnum) simple-array)
+
+(defun count-lines (str loc length &aux (line 0) (start 0))
+  (bind (((:flet fn (end))
+	  (prog1 (incf line (%count-lines str start end)) (setf start end)))
+	 (array (make-array (1+ length) :element-type 'fixnum)))
+    (loop :for end :across loc
+	  :for index :from 0
+	  :do (setf (aref array index) (fn end))
+	  :finally (return array))))
 
 (defun make-indexed-ftml (string)
   (bind (((:values loc length) (make-loc-list string)))
     (%make-indexed-ftml :ftml-string string
 			:ftml-location loc
-			:ftml-line (count-lines string loc)
+			:ftml-line (count-lines string loc length)
 			:ftml-length length)))
+
+
 
 
 
