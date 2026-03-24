@@ -93,16 +93,15 @@
 
 (defun ftml-ref-loc (index indexed-ftml)
   (with-slots (ftml-location ftml-length) indexed-ftml
-    (when (> ftml-length index)
-      (let* ((start (aref ftml-location index))
-	     (end (aref ftml-location (1+ index))))
-	(values start end)))))
+    (let* ((start (aref ftml-location index))
+	   (end (aref ftml-location (1+ index))))
+      (values start end))))
 
 (defun ftml-ref-line (index indexed-ftml)
   (with-slots (ftml-length ftml-line) indexed-ftml
-    (when (> ftml-length index)
-      (values (aref ftml-line index)
-	      (aref ftml-line (1+ index))))))
+    (values (aref ftml-line index)
+	    (aref ftml-line (1+ index)))))
+
 
 (defun ftml-ref (index indexed-ftml)
   (with-slots (ftml-location ftml-length ftml-string) indexed-ftml
