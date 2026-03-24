@@ -103,12 +103,17 @@
 	    (aref ftml-line (1+ index)))))
 
 
+(-> ftml-ref (integer indexed-ftml) ftml-ref)
+
 (defun ftml-ref (index indexed-ftml)
   (with-slots (ftml-location ftml-length ftml-string) indexed-ftml
     (when (> ftml-length index)
       (let* ((start (aref ftml-location index))
 	     (end (aref ftml-location (1+ index))))
 	(make-ftml-ref :string ftml-string :start start :end end)))))
+
+
+(-> ftml-header (indexed-ftml) (or null ftml-ref))
 
 (defun ftml-header (indexed-ftml)
   ;; indexed-ftmlの先頭に角括弧以外のテキストがある場合、それを返す。
